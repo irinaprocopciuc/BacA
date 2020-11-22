@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html;" charset="UTF-8" />
+    <title>BacA Documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://w3c.github.io/scholarly-html/css/scholarly.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header >
+        <h1 class="font-weight-bold">BacA Documentation</h1>
+    </header>
+    <div>
+        <nav>
+            <h2 class="text-info">Page of Contents</h1>
+                <ol class="text-secondary">
+                    <li><a href="#Abstract">Abstract</a></li>
+                    <li><a href="#Introduction">Introduction</a></li>
+                    <li><a href="#Technologies">Technologies</a></li>
+                    <ol class="ml-1 text-secondary">
+                        <li><a href="#front-end">Front End Technologies</a></li>
+                        <li><a href="#back-end">Back End Technologies</a></li>
+                        <li><a href="#apis">APIs</a></li>
+                    </ol>
+                    <li><a href="#Structure">Architecture</a></li>
+                    <li><a href="#UserInteraction">User interaction</a>
+                        <ol class="ml-1">
+                            <li><a href="#loginpage">Login page</a></li>
+                            <li><a href="#home-page">Home page</a></li>
+                            <li><a href="#trip-details-page">Trip details page </a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#Use-Cases">Use Cases</a></li>
+                    <li><a href="#References">References</a></li>
+                </ol>
+        </nav>
+        <hr>
+        <br>
+        <h3 class="text-info">Project realized by:</h3>
+        <ul class="">
+            <li>Chelaru Iustina casat. Laschi</li>
+            <li>Ionescu Robert Florin</li>
+            <li>Procopciuc Irina</li>
+        </ul>
+
+        <h3 id="Abstract" class="text-info">Abstract</h3>
+        <p>
+
+        </p>
+        <hr>
+        <br>
+        <h3 id="Introduction" class="text-info">Introduction</h3>
+        <p>
+
+        </p>
+        <hr>
+        <br>
+        <h3 id="Technologies" class="text-info"> Technologies </h3>
+        <p>In this chapter we are going to give some details about the technologie we will use on the frontend and
+            backend side,
+            but also about the public API's we found useful for our application.</p>
+        <br>
+        <h4 id="front-end" class="text-info">Front End Technologies</h4>
+        <p>
+            In order to develop the user interface we chose to use <a href="https://angular.io/" target="_blank">Angular
+                framework</a>
+            because it will help us build
+            maintainable and easy to use components. Also, we will integrate Angular Material, a library which contains
+            pre-build styled components, in order to have UI consistency between pages.
+        </p>
+        <p>For the installation of the packages and also to run and test the app we will use the <span
+                class="text-danger">npm</span> package manager
+            from Node.js.</p>
+        <p>
+            Apart from that we used a series of additional packages that helped us in the development of various key
+            functionalities:
+        </p>
+        <ul>
+            <li>
+                <span class="text-secondary"><code>Angular Material</code></span>
+                <p class="ml-4">This is a an official component library build by Angular and Typescript. It
+                    contains pre-build components which can be styled using pre-defined properties. This library also
+                    follows the best UI practicies like adding new features promptly from command line templates. Some
+                    of the available components we will use from here are: navigation bar, button, input, card, menu.
+                </p>
+            </li>
+            <li>
+                <span class="text-secondary"><code>Angular Google Maps</code></span>
+                <p class="ml-4">The Angular Google Maps library provides services and directives for implementing Google
+                    Maps services. There are directives available for creating maps, using markers and many others. It
+                    also provides an async function that is useful for checking if the Google Maps library is loaded on
+                    the webpage.</p>
+            </li>
+            <li>
+                <span class="text-secondary"><code>ngx-charts</code></span>
+                <p class="ml-4">This library is used for data visualization and can handle various forms of
+                    customizations while rendering. In ngx-charts their charts rely mostly on using Angular to animate
+                    SVGs, which offers more speed and flexibility as this library was optimized for use in Angular.</p>
+            </li>
+        </ul>
+        <hr>
+        <br>
+        <h4 id="back-end" class="text-info">Back End Technologies</h4>
+        <p>For the backend part we plan to develop a REST API that would provide data in json format to the client.
+            In order to achieve this we will use Java as the main programming language. On top of this it comes the
+            <a href="https://spring.io/projects/spring-boot" target="_blank">Spring Boot framework</a>, a very popular
+            Java-based
+            framework for building web applications.
+        </p>
+        <p>For the data persistence layer we will use <a href="https://www.mysql.com/" target="_blank">MySQL</a>, an
+            open-source
+            relational
+            database management system.</p>
+        <p>Other dependencies used are:</p>
+        <ul>
+            <li><code>Maven</code>
+                <p class="ml-4">The most popular build and dependency management for Java, <a
+                        href="https://maven.apache.org/" target="_blank">Maven</a>
+                    will help us manage all the dependencies of our project. It will help us easily add jars and other
+                    dependencies to the project, and update them rapidly when needed.</p>
+            </li>
+            <li><code>Jackson</code>
+                <p class="ml-4">Jackson is a very populare and efficient java based library, used to serialize or map
+                    java objects to JSON and vice versa. It provides a high level facade to simplify commonly used use
+                    cases and also provides default mapping for most of the objects to be serialized.</p>
+            </li>
+        </ul>
+        <hr>
+        <br>
+        <h4 id="apis" class="text-info">APIs</h4>
+        <p>In this subchaper we will describe which APIs we decided to include in our application and what are their use for it.
+        </p>
+        <ul>
+            <li>
+                <code> <a href="https://api.fsapp.io/docs" target="_blank">Fantastic Stay API</a></code>
+                <p>
+                    This API will give us informations about where the user stayed during his trip, if the reservation
+                    was done properly and also
+                    will allow the user to write reviews for a specific accomodation and to see how much he spent there.
+                </p>
+            </li>
+            <li>
+                <code>
+                    <a href="https://developer.trimblemaps.com/" target="_blank">Trimble Trip API</a>
+                </code>
+                <p>
+                    Another API we found useful was the Trimble Trip API which provides us with the tools to build
+                    routing, scheduling and navigation
+                    features in our applications. With its help we will be able to calculate the trip costs, to search
+                    for the user's location and to
+                    update it accuretly on the map. Also, it offers and a trip management solution for the users who
+                    like to travel by car.
+                </p>
+            </li>
+            <li>
+                <code>
+                    <a href="https://allmyles.docs.apiary.io/#reference/dashboard-api" target="_blank">Allmyles API</a>
+                </code>
+                <p>
+                    This API will give us informations about the bookings for a specific user, flights he planed, hotels
+                    where he reserved any rooms and
+                    will also provide us the nearest airport or the location of the hotel.
+                </p>
+            </li>
+            <li>
+                <code>
+                    <a href="https://developers.google.com/maps/documentation/javascript/overview" target="_blank">Maps Javascript API</a>
+                </code>
+                <p>
+                    This API will provide us with a way to customize maps with our own content and imagery, allowing us
+                    to display the maps on web pages and mobile devices. The Maps Javascript API features four basic map
+                    types(roadmap, satellite, hybrid and terrain) which can be modified using layers and styles,
+                    controls and events, and various services and libraries.
+                </p>
+            </li>
+        </ul>
+
+        <hr>
+        <br>
+        <h3 id="Structure" class="text-info">Architecture</h3>
+
+        <hr><br>
+        <h3 id="UserInteraction" class="text-info">User interaction</h3>
+        <hr>
+
+        <h3 id="Use-Cases" class="text-info">Use Cases</h3>
+        <br>
+        <ul style="list-style-type:lower-roman;">
+            <li>
+                <span class="text-secondary"><code>Use case for user login</code></span>
+                <br>
+                <img src="assets/usecase_login.png" class="img-fluid mt-4 mb-4" alt="UseCaseLogin">
+                <br>
+                <p class="ml-4">The login into our application can be described by the following steps:</p>
+                <ul style="list-style-type:circle;">
+                    <li>When first entering the application, the user will encounter the homepage with two buttons
+                        available in the menu:
+                        Login(used in case the user already has an account created) and Register(if the user still
+                        doesn't have any credentials).</li>
+                    <li>If he already has an account he will fill the username and the password which will be validated
+                        using the validateUser method and after pressing the Login button,
+                        if everything it's ok,he will be redirected to homepage and a success message will be displayed.
+                        Otherwise, an error will pop up and the user will need to introduce the credentials again.
+                        hopefully the right ones this time.
+                    </li>
+                    <li>If the user doesn't have an account he will press the Register button and will fill the form
+                        with the username he desires, his name, email and
+                        with a password by his choice. After successfully registered, the user will be redirected to
+                        Login page and he will follow the step described above
+                        in order to access the application.
+                    </li>
+                    <li>In everything goes smoothly, now the user should be able to navigate to the other pages of our
+                        application.</li>
+                    <li>If the user doesn't want to login to our app, he still can access the homepage where there will
+                        be some generic informations, but
+                        he won't be able to log his trips and see other details about them.
+                    </li>
+                </ul>
+            </li>
+            <br>
+            <li>
+                <span class="text-secondary"><code>Use case for Trip</code></span>
+                <br>
+                <img src="assets/usecase_trip.png" class="img-fluid mt-4 mb-4" alt="UseCaseTrip">
+                <br>
+                <p class="ml-4">The operation logic for this use case can be described by the following steps:</p>
+                <ul style="list-style-type:circle;">
+                    <li>The user navigates to the homepage of our application.</li>
+                    <li>The user has the option to login, step mandatory to be taken if he wants to add new trips.</li>
+                    <li>After the user successfully pass the login step, he will be able to add a new trip.</li>
+                    <li>A new form will be displayed and the user should add some basic details of his trip like
+                        duration,
+                        destination, budget.</li>
+                    <li>After the user presses the save button, all the details he filled are send to the system. In the
+                        list of trips from the homepage will appear a
+                        new trip, the one created earlier.
+                    </li>
+                    <li>From the list of trips added by the user, he will be able to edit or delete them, and each time
+                        the new changes will be sent to the system.</li>
+                </ul>
+            </li>
+            <br>
+            <li>
+                <span class="text-secondary"><code>Use case for TripDetails<br></code></span>
+                <img src="assets/usecase_tripdetails.png" class="img-fluid mt-4 mb-4" alt="UseCaseTripDetails">
+                <br>
+                <p class="ml-4">This use case can be described by the following steps:</p>
+                <ul style="list-style-type:circle;">
+                    <li>The user navigates to TripDetails page after login.</li>
+                    <li>After this he will be able to see the trip details he added on the home page and furthermore a
+                        map will be loaded.
+                        This map will have a dropdown select placed above and the user will be able to select the type
+                        of objectives he wants to see on the map. After he selects one option the results will appear on
+                        map.</li>
+                    <li>Also, the user has the possibility to ask for an emergency number available in the zone he
+                        planned the trip, in case some unexpected things happen.</li>
+                    <li>After this, the user can purchase a plane ticket if he wants, and after he adds the date when
+                        he wants to fly,
+                        the ticket will be added to the tickets section from the page.
+                    </li>
+                    <li>As an alternative, he can choose to rent a car for a specific period and after he fills the
+                        required details,
+                        the element will appear in the Rent car section.
+                    </li>
+                </ul>
+            </li>
+            <br>
+            <li>
+                <span class="text-secondary"><code>Use case for Accommodation<br></code></span>
+                <img src="assets/usecase_accommodation.png" class="img-fluid mt-4 mb-4" alt="UseCaseAccommodation">
+                <br>
+                <p class="ml-4">In this case we have the following steps:</p>
+                <ul style="list-style-type:circle;">
+                    <li>The user navigates to TripDetails page after login.</li>
+                    <li>He selects the Add accommodation button from this page.</li>
+                    <li>After this he will be redirected to another page where he can fill the details about where he
+                        wants to stay.
+                        Also, he will be able to choose from a list of hotels selected using the details he specified before.
+                    </li>
+                    <li>After the user selects one hotel and the period he wants to stay there, he will be able to see
+                        the room details
+                        and also the booking status.
+                    </li>
+                    <li>After the specified period for the booking ends, the user can rate the hotel and its
+                        servicies.</li>
+                </ul>
+            </li>
+        </ul>
+        <hr /><br />
+        <h3 id="References" class="text-info">References</h3>
+        <ol>
+            <li><a href="https://profs.info.uaic.ro/~busaco/teach/courses/websys/index.html" target="_blank">Web Systems
+                    Development</a></li>
+            <li><a href="https://angular.io/" target="_blank">Angular</a></li>
+            <li><a href="https://material.angular.io/" target="_blank">Angular Material</a></li>
+            <li><a href="https://spring.io/projects/spring-boot" target="_blank">Spring Boot</a></li>
+            <li><a href="https://www.tutorialspoint.com/jackson/index.htm" target="_blank">Jackson</a></li>
+            <li><a href="https://api.fsapp.io/docs" target="_blank">Fantastic Stay API</a></li>
+            <li><a href="https://developer.trimblemaps.com/" target="_blank">Trimble Trip API</a></li>
+            <li> <a href="https://allmyles.docs.apiary.io/#reference/dashboard-api" target="_blank">Allmyles API</a>
+            </li>
+            <li><a href="https://developers.google.com/maps/documentation/javascript/overview" target="_blank">Maps
+                    Javascript API</a>
+            </li>
+        </ol>
+        <hr>
+    </div>
+</body>
+
+</html>
