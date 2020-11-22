@@ -52,7 +52,8 @@
 
         <h3 id="Abstract" class="text-info">Abstract</h3>
         <p>
-
+            BacA (Backpacker Web Assistant) is an application that allows hikers to choose a route to explore a 
+            foreign country while also offering the opportunity to find out nearest shops, hospitals, hotels.
         </p>
         <hr>
         <br>
@@ -185,7 +186,47 @@
         <hr>
         <br>
         <h3 id="Structure" class="text-info">Architecture</h3>
-
+        <img src="assets/architecture_diagram.png" class="img-fluid mt-4 mb-4" alt="UseCaseLogin">
+        <p>
+            As we can see, the architecture of the application is implemented based on the following elements : Client (Web browser and mobile browser), Angular frontend application, Appi, Java with Spring Boot backend and MySQL database.
+        </p>
+     
+        <p>
+           The communication between this services is shown below:
+        </p>
+       
+        <section id="Client">
+            <h5>Client</h5>
+            <p>
+                The application can be accessed through web browser or mobile browser. The user can get in contact with the frontend part that we will be doing in Angular frontend application.
+            </p>
+            </section>
+            <section id="Angular">
+                <h5>Angular frontend application</h5>
+                <p>
+                   Through Angular frontend application some of the public API will be accesed: Fantastic stay API, Maps Javascript API, Trimble Trip API and Allmyles API. With the help of API we can find details like where is a person accomodated, located, the shops and hospitals around or a police station that he or she can go to. 
+                   Also, the frontend application will communicate with the backend through some API made by us.
+                </p>
+            </section>
+            <section id="API">
+                <h5>API</h5>
+                <p>
+                   We wil use some public API like Fantastic stay API, Maps Javascript API, Trimble Trip API and Allmyles API to determine
+                </p>
+            </section>
+            <section id="Java">
+                <h5>Java with Spring Boot </h5>
+                <p>
+                    The backend part it will be made in Java with Spring Boot as a framework.
+                </p>
+            </section>
+            <section id="MySQL">
+                <h5>MySQL database</h5>
+                <p>
+                In MySQL the database will be created. The backend will communicate with tha database through MySQL.
+                </p>
+            </section>
+    </section>
         <hr><br>
         <h3 id="UserInteraction" class="text-info">User interaction</h3>
         <hr>
