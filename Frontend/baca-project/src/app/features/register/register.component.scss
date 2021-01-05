@@ -1,0 +1,48 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: auto;
+  margin-top: 50px;
+
+  mat-card {
+    width: 400px;
+  }
+}
+
+.register-form{
+  min-width: 150px;
+  max-width: 400px;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.form-field-container{
+  display: flex;
+  flex-direction: column;
+}
+.register-form-filed{
+  width: 100%;
+}
+
+mat-form-field {
+  margin-bottom: 10px;
+}
+
+button{
+  &:first-child{
+    margin-right: 10px;
+  }
+}
+
+.buttons-container{
+  margin-top: 10px;
+  span{
+    cursor: pointer;
+    font-weight: 500;
+    margin-right: 15px;
+   &:hover{
+    color: #ff4081;
+   }
+  }
+}

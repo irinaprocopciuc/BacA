@@ -1,0 +1,8 @@
+<mat-toolbar color="primary" class="app-header" >
+    <span routerLink="/homepage">BacA</span>
+   <div class="login-register-btn">
+    <span (click)="logout()" *ngIf="isLoggedIn$ | async">Logout</span>
+   </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
