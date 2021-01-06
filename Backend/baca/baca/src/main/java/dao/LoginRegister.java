@@ -26,18 +26,18 @@ public class LoginRegister implements LoginRegisterInterface {
 	}
 
 	@Override
-	public Boolean checkUser(LoginDetails credentials) {
+	public int checkUser(LoginDetails credentials) {
 		try {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from user where user_name ='" + credentials.getUsername()
+			ResultSet rs = stmt.executeQuery("select iduser from user where user_name ='" + credentials.getUsername()
 					+ "' and password='" + credentials.getPassword() + "';");
 			if (rs.next()) {
-				return true;
+				return rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return -1;
 	}
 
 	@Override

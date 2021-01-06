@@ -31,29 +31,32 @@ public class RegisterController {
 		this.registerService = registerService;
 	}
 
-	
 	@PostMapping(path = "/registerUser")
-    public ResponseEntity<String> register(@Valid @RequestBody RegisterDetails credentials, HttpServletResponse response) throws JsonProcessingException {
+	public ResponseEntity<String> register(@Valid @RequestBody RegisterDetails credentials,
+			HttpServletResponse response) throws JsonProcessingException {
 
-        Map<String,Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 
-        if(!credentials.getPassword().equals(credentials.getRePassword())){//passwords are not identical
-            map.put("status",HttpStatus.UNAUTHORIZED);
-            map.put("code", "401");
-            map.put("message","Register failed, passwords do not match!");
-            return new ResponseEntity<>(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(map), HttpStatus.UNAUTHORIZED);
-        }else{
-            if (!registerService.addUser(credentials)) {//user already exists
-                map.put("status", HttpStatus.UNAUTHORIZED);
-                map.put("code", "401");
-                map.put("message", "Register failed, user already exists!");
-                return new ResponseEntity<>(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(map), HttpStatus.UNAUTHORIZED);
-            } else {
-                map.put("status", HttpStatus.OK);
-                map.put("code", "200");
-                map.put("message", "Register successful!");
-                return new ResponseEntity<>(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(map), HttpStatus.OK);
-            }
-        }
-    }
+		if (!credentials.getPassword().equals(credentials.getRePassword())) {// passwords are not identical
+			map.put("status", HttpStatus.UNAUTHORIZED);
+			map.put("code", "401");
+			map.put("message", "Register failed, passwords do not match!");
+			return new ResponseEntity<>(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(map),
+					HttpStatus.UNAUTHORIZED);
+		} else {
+			if (!registerService.addUser(credentials)) {// user already exists
+				map.put("status", HttpStatus.UNAUTHORIZED);
+				map.put("code", "401");
+				map.put("message", "Register failed, user already exists!");
+				return new ResponseEntity<>(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(map),
+						HttpStatus.UNAUTHORIZED);
+			} else {
+				map.put("status", HttpStatus.OK);
+				map.put("code", "200");
+				map.put("message", "Register successful!");
+				return new ResponseEntity<>(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(map),
+						HttpStatus.OK);
+			}
+		}
+	}
 }

@@ -15,7 +15,7 @@ export class LoginRegisterService {
     private readonly http: HttpClient,
     private readonly router: Router
   ) {
-    this.isLoggedIn$ = new BehaviorSubject<boolean>(false);
+    this.isLoggedIn$ = new BehaviorSubject<boolean>(true);
   }
 
   get isLoggedIn() {
@@ -26,26 +26,35 @@ export class LoginRegisterService {
     this.isLoggedIn$.next(newSatate);
   }
 
+  setCurrentUser(user) {
+    localStorage.setItem('userId', user);
+  }
+
+  getCurrentUser() {
+    return localStorage.getItem('userId');
+  }
+
   loginUser(loginObj: LoginObject) {
-    if (loginObj.username !== '' &&loginObj.password !== '') {
+    if (loginObj.username !== '' && loginObj.password !== '') {
       this.isLoggedIn$.next(true);
       return this.http.post(`${this.baseUrl}/login/checkUser`, {
-        ...loginObj
-       })
+        ...loginObj,
+      });
     }
   }
 
   registerUser(registerObj: RegisterObject) {
     return this.http.post(`${this.baseUrl}/register/registerUser`, {
-      ...registerObj
-     })
+      ...registerObj,
+    });
   }
 
-
   logout() {
-    confirm("Are you sure you want to logout?");
-    this.isLoggedIn$.next(false);
-    this.router.navigate(["login"]);
+    if (confirm('Are you sure you want to logout?')) {
+      this.isLoggedIn$.next(false);
+      this.setCurrentUser(null);
+      this.router.navigate(['login']);
+    }
   }
 }
 
@@ -55,9 +64,9 @@ interface LoginObject {
 }
 
 interface RegisterObject {
-  username: string,
-  password: string,
-  repassword: string,
-  name: string,
-  email: string
+  username: string;
+  password: string;
+  repassword: string;
+  name: string;
+  email: string;
 }

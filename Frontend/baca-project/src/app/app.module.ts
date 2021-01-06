@@ -1,4 +1,3 @@
-import { MatCardModule } from '@angular/material/card';
 import { CoreModule } from './core/core.module';
 import { FeaturesModule } from './features/features.module';
 import { BrowserModule } from '@angular/platform-browser';

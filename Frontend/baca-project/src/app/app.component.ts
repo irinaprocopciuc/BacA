@@ -12,7 +12,10 @@ export class AppComponent implements OnInit {
   title = 'baca-project';
   isLoggedIn$: Observable<boolean>;
 
-  constructor(public readonly loginService: LoginRegisterService) {}
+  constructor(
+    public readonly loginService: LoginRegisterService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit() {
     this.isLoggedIn$ = this.loginService.isLoggedIn;
@@ -20,5 +23,9 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.loginService.logout();
+  }
+
+  navigateToTripList() {
+    this.router.navigate(['tripsList'])
   }
 }

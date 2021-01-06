@@ -34,8 +34,8 @@ public class LoginController {
 	public ResponseEntity<String> login(@RequestBody LoginDetails loginInfo, HttpServletResponse r) throws JsonProcessingException {
 		Map<String,Object> map = new HashMap<>();
 		System.out.println(loginInfo.getUsername());
-        Boolean resp = loginService.checkUser(loginInfo);
-        if(resp == false){
+        int resp = loginService.checkUser(loginInfo);
+        if(resp == -1){
             map.put("status", HttpStatus.UNAUTHORIZED);
             map.put("code", "401");
             map.put("message","Login failed, try again!");
@@ -44,6 +44,7 @@ public class LoginController {
             map.put("status", HttpStatus.OK);
             map.put("code", "200");
             map.put("message","Login successful!");
+            map.put("userId", resp);
             return new ResponseEntity<>(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(map), HttpStatus.OK);
         }
 	}

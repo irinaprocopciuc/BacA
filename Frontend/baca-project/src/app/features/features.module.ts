@@ -10,9 +10,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { TripsListComponent } from './trips-list/trips-list.component';
+import { TripCardComponent } from './trip-card/trip-card.component';
 
 @NgModule({
-  declarations: [LoginComponent, HomepageComponent, RegisterComponent],
+  declarations: [LoginComponent, HomepageComponent, RegisterComponent, TripsListComponent, TripCardComponent],
   imports: [
     CommonModule,
     AppRoutingModule,

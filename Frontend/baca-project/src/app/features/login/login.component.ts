@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
         if (resp['code'] === '200') {
           this.errorService.displaySuccessToast(resp['message'], '');
           this.router.navigate(['homepage']);
+          this.loginService.setCurrentUser(resp['userId']);
         }
       },
       (err) => {

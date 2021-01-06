@@ -17,7 +17,7 @@ public class LoginService {
 		this.db = db;
 	}
 
-	public Boolean checkUser(LoginDetails credentials) {
+	public int checkUser(LoginDetails credentials) {
 		return db.checkUser(credentials);
 	}
 }

@@ -1,0 +1,15 @@
+<mat-card class="card">
+  <div class="left-container">
+    <mat-card-title>
+      {{ tripDetails.tripName }}
+    </mat-card-title>
+    <mat-card-content>
+      From: <strong>{{ tripDetails.startDate }}</strong> to
+      <strong>{{ tripDetails.endDate }}</strong>
+    </mat-card-content>
+  </div>
+  <mat-card-actions class="right-container">
+    <button mat-flat-button color="warn">View details</button>
+    <button mat-flat-button color="warn">Delete trip</button>
+  </mat-card-actions>
+</mat-card>
