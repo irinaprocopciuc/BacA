@@ -14,11 +14,10 @@ CREATE TABLE `baca`.`trip` (
   `destination` VARCHAR(45) NOT NULL,
   `startDate` DATE NOT NULL,
   `endDate` DATE NOT NULL,
-  `userId` INT NULL,
-  PRIMARY KEY (`idtrip`),
+  `userId` INT NOT NULL,
   UNIQUE INDEX `idtrip_UNIQUE` (`idtrip` ASC) VISIBLE,
-  UNIQUE INDEX `tripName_UNIQUE` (`tripName` ASC) VISIBLE);
-  INDEX `iduser_idx` (`userId` ASC) VISIBLE,
+  PRIMARY KEY (`idtrip`),
+  INDEX `userId_idx` (`userId` ASC) VISIBLE,
   CONSTRAINT `userId`
     FOREIGN KEY (`userId`)
     REFERENCES `baca`.`user` (`iduser`)
