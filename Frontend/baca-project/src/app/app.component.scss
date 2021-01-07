@@ -4,6 +4,9 @@
 
   span {
     outline: none;
+    &:hover {
+      color: #f6f0fa;
+    }
   }
 }
 

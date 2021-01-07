@@ -129,4 +129,22 @@ public class Trip implements TripInterface {
 		return -1;
 	}
 
+	public boolean deleteTrip(String tripId) {
+		
+		try {
+			Statement stmt = conn.createStatement();
+			int rs = stmt.executeUpdate("delete from trip where idtrip ='"+tripId+"'");
+			if(rs==1) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
 }

@@ -1,3 +1,5 @@
+import { TripDetailsComponent } from './features/trip-details/trip-details.component';
+import { AddTripComponent } from './features/add-trip/add-trip.component';
 import { TripsListComponent } from './features/trips-list/trips-list.component';
 import { RegisterComponent } from './features/register/register.component';
 import { HomepageComponent } from './features/homepage/homepage.component';
@@ -26,6 +28,14 @@ const routes: Routes = [
   {
     path: 'tripsList',
     component: TripsListComponent
+  },
+  {
+    path: 'addTrip',
+    component: AddTripComponent
+  },
+  {
+    path: 'tripDetails',
+    component: TripDetailsComponent
   }
 ];
 

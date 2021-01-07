@@ -27,4 +27,8 @@ export class TripsListComponent implements OnInit {
       this.trips = resp.response;
     });
   }
+
+  updateTripList(event) {
+    this.trips = this.trips.filter(item => item.idtrip != event);
+  }
 }

@@ -15,4 +15,6 @@ public interface TripInterface {
 	public int findTrip(String tripName);
 
 	public boolean addTrip(TripDetails details);
+	
+	public boolean deleteTrip(String tripId);
 }

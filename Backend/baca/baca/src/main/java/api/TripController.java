@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import model.RegisterDetails;
 import model.TripDetails;
 import service.TripService;
 
@@ -36,7 +36,7 @@ public class TripController {
 	}
 
 	@GetMapping(path = "/getTrips/userID={userID}")
-	public ResponseEntity<String> getTasks(@PathVariable("userID") String userID) throws JsonProcessingException {
+	public ResponseEntity<String> getTrips(@PathVariable("userID") String userID) throws JsonProcessingException {
 		Map<String, Object> map = new HashMap<>();
 		if (userID.matches("\\d+")) {
 			List<Map<String, String>> tripsList = tripService.getTrips(userID);
@@ -57,7 +57,7 @@ public class TripController {
 	}
 
 	@GetMapping(path = "/getTrip/tripID={tripID}")
-	public ResponseEntity<String> getTaskDetails(@PathVariable("tripID") String tripID) throws JsonProcessingException {
+	public ResponseEntity<String> getTripDetails(@PathVariable("tripID") String tripID) throws JsonProcessingException {
 		Map<String, Object> map = new HashMap<>();
 		if (tripID.matches("\\d+")) {
 			Map<String, String> tripDetails = tripService.getTripDetails(tripID);
@@ -87,7 +87,7 @@ public class TripController {
 	}
 
 	@PostMapping(path = "/addTrip")
-	public ResponseEntity<String> register(@Valid @RequestBody TripDetails credentials, HttpServletResponse response)
+	public ResponseEntity<String> addTrip(@Valid @RequestBody TripDetails credentials, HttpServletResponse response)
 			throws JsonProcessingException {
 
 		Map<String, Object> map = new HashMap<>();
@@ -104,6 +104,37 @@ public class TripController {
 			map.put("message", "Trip added successful!");
 			return new ResponseEntity<>(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(map),
 					HttpStatus.OK);
+		}
+	}
+	
+	@DeleteMapping(value = "/deleteTrip/tripId={tripId}")
+	public ResponseEntity<String> deteleTrip(@PathVariable("tripId") String tripId) throws JsonProcessingException {
+		Map<String, Object> map = new HashMap<>();
+		if (tripId.matches("\\d+")) {
+			Boolean tripDeleteResponse = tripService.deleteTrip(tripId);
+			if(tripDeleteResponse == true) {
+				map.put("status", HttpStatus.OK);
+				map.put("code", "200");
+				map.put("message", "Trip deleted!");
+				map.put("response", tripDeleteResponse);
+				return new ResponseEntity<>(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(map),
+						HttpStatus.OK);
+			}else {
+				map.put("status", HttpStatus.BAD_REQUEST);
+				map.put("code", "400");
+				map.put("message", "Trip not deleted!");
+				map.put("response", tripDeleteResponse);
+				return new ResponseEntity<>(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(map),
+						HttpStatus.BAD_REQUEST);
+			}
+			
+		} else {
+			map.put("status", HttpStatus.METHOD_NOT_ALLOWED);
+			map.put("code", "405");
+			map.put("message", "Trip id incorrect!");
+			map.put("response", "false");
+			return new ResponseEntity<>(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(map),
+					HttpStatus.METHOD_NOT_ALLOWED);
 		}
 	}
 

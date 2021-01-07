@@ -1,0 +1,40 @@
+.trip-details-container {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  margin: 50px auto 0 auto;
+  border-radius: 10px;
+  border: 1px solid #dedce0;
+  -webkit-box-shadow: 34px 21px 40px -5px rgba(172, 165, 242, 1);
+  -moz-box-shadow: 34px 21px 40px -5px rgba(172, 165, 242, 1);
+  box-shadow: 34px 21px 40px -5px rgba(172, 165, 242, 1);
+  padding: 20px;
+
+  #title {
+    font-size: 30px;
+    padding-bottom: 30px;
+    color: #706f82;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      font-size: 16px;
+      padding-bottom: 10px;
+      strong {
+        color: #574ef5;
+      }
+    }
+  }
+
+  agm-map {
+    height: 300px;
+  }
+}
+
+#map {
+  width: 700px;
+  height: 500px;
+}

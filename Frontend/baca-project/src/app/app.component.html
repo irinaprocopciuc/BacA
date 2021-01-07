@@ -1,8 +1,8 @@
 <mat-toolbar color="primary" class="app-header">
   <span routerLink="/homepage">BacA</span>
   <div class="login-register-btn">
-    <span (click)="navigateToTripList()" *ngIf="isLoggedIn$ | async">Trips List</span>
-    <span *ngIf="isLoggedIn$ | async">Add trip</span>
+    <span (click)="navigateToTripList()" *ngIf="isLoggedIn$ | async">Trips</span>
+    <span (click)="navigateToAddForm()" *ngIf="isLoggedIn$ | async">New trip</span>
     <span (click)="logout()" *ngIf="isLoggedIn$ | async">Logout</span>
   </div>
 </mat-toolbar>

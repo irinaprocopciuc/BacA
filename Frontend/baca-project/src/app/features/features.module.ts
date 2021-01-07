@@ -12,9 +12,13 @@ import { RegisterComponent } from './register/register.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { TripsListComponent } from './trips-list/trips-list.component';
 import { TripCardComponent } from './trip-card/trip-card.component';
+import { AddTripComponent } from './add-trip/add-trip.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { TripDetailsComponent } from './trip-details/trip-details.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
-  declarations: [LoginComponent, HomepageComponent, RegisterComponent, TripsListComponent, TripCardComponent],
+  declarations: [LoginComponent, HomepageComponent, RegisterComponent, TripsListComponent, TripCardComponent, AddTripComponent, TripDetailsComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -24,7 +28,9 @@ import { TripCardComponent } from './trip-card/trip-card.component';
     MatCardModule,
     MatInputModule,
     MatButtonModule,
+    MatDatepickerModule,
     ToastrModule.forRoot(),
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyB31v0iK4rSPiZ9Q6utyM3hwP0Gc2mbIOM'})
   ],
   entryComponents: [LoginComponent, HomepageComponent],
   providers: [{ provide: ToastrService, useClass: ToastrService }],

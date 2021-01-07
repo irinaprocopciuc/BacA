@@ -9,11 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,9 +20,13 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     FeaturesModule,
     CoreModule,
-    MatToolbarModule
+    MatToolbarModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB31v0iK4rSPiZ9Q6utyM3hwP0Gc2mbIOM',
+      libraries: ['places'],
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

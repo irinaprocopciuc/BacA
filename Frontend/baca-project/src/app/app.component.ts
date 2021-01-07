@@ -21,11 +21,15 @@ export class AppComponent implements OnInit {
     this.isLoggedIn$ = this.loginService.isLoggedIn;
   }
 
-  logout() {
+  logout(): void {
     this.loginService.logout();
   }
 
-  navigateToTripList() {
+  navigateToTripList(): void {
     this.router.navigate(['tripsList'])
+  }
+
+  navigateToAddForm(): void {
+    this.router.navigate(['addTrip']);
   }
 }

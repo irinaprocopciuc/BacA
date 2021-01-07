@@ -1,0 +1,80 @@
+<div class="trip-form">
+  <form
+    class="form"
+    [formGroup]="addForm"
+    (ngSubmit)="addNewTrip(addForm.value)"
+  >
+    <h2>Add your next trip</h2>
+    <div class="form-field-container">
+      <mat-form-field class="add-form-field">
+        <input matInput placeholder="Trip name" formControlName="tripName" />
+        <mat-error
+          *ngIf="
+            !addForm.controls['tripName'].valid && addForm.controls['tripName'].touched
+          "
+        >
+          Trip name is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="add-form-field">
+        <input
+          matInput
+          placeholder="Destination"
+          formControlName="destination"
+        />
+        <mat-error
+          *ngIf="
+            !addForm.controls['destination'].valid &&
+            addForm.controls['destination'].touched
+          "
+        >
+          Destination is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="add-form-field">
+        <mat-label>Choose the start date</mat-label>
+        <input
+          matInput
+          placeholder="Start date"
+          formControlName="startDate"
+          [matDatepicker]="pickerStart"
+        />
+        <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
+        <mat-error
+          *ngIf="
+            !addForm.controls['startDate'].valid &&
+            addForm.controls['startDate'].touched
+          "
+        >
+          Start date is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="add-form-field">
+        <mat-label>Choose the end date</mat-label>
+        <input
+          matInput
+          placeholder="End date"
+          formControlName="endDate"
+          [matDatepicker]="pickerEnd"
+        />
+        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+        <mat-error
+          *ngIf="
+            !addForm.controls['endDate'].valid &&
+            addForm.controls['endDate'].touched
+          "
+        >
+          End date is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="buttons-container">
+      <button mat-flat-button color="primary" [disabled]="!addForm.valid">
+        Save
+      </button>
+      <span (click)="onReset()">Cancel</span>
+    </div>
+  </form>
+</div>

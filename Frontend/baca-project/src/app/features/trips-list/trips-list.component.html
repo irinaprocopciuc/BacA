@@ -1,5 +1,8 @@
 <div class="trips-list">
-  <div *ngFor="let trip of trips" >
-    <app-trip-card [tripDetails]="trip"></app-trip-card>
+  <div *ngFor="let trip of trips">
+    <app-trip-card
+      [tripDetails]="trip"
+      (listUpdate)="updateTripList($event)"
+    ></app-trip-card>
   </div>
 </div>

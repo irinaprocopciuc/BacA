@@ -1,7 +1,8 @@
 export interface TripDetails {
+  idtrip: number;
   tripName: string;
   destination: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   userId: number;
 }

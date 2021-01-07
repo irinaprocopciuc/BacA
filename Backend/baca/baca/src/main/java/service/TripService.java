@@ -27,12 +27,16 @@ public class TripService {
 	public Map<String, String> getTripDetails(String taskID) {
 		return conn.getTripDetails(taskID);
 	}
+
+	public boolean addTrip(TripDetails credentials) {
+		if (conn.findTrip(credentials.getTripname()) == -1) {
+			return conn.addTrip(credentials);
+		} else {
+			return false;
+		}
+	}
 	
-	 public boolean addTrip(TripDetails credentials){
-	        if(conn.findTrip(credentials.getTripname())==-1){
-	            return conn.addTrip(credentials);
-	        }else{
-	            return false;
-	        }
-	    }
+	public boolean deleteTrip(String tripId) {
+		return conn.deleteTrip(tripId);
+	}
 }
