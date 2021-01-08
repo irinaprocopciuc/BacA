@@ -1,0 +1,59 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Login API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/irinaprocopciuc/login/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "paths": {
+    "/login/checkUser": {
+      "post": {
+        "tags": [
+          "checkUser"
+        ],
+        "summary": "Login user",
+        "description": "Check if the user exists in the database",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Login succeeded."
+          },
+          "401": {
+            "description": "Login failed, try again."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "body": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "user1"
+          },
+          "password": {
+            "type": "string",
+            "example": "pass"
+          }
+        }
+      }
+    }
+  }
+}

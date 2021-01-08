@@ -1,0 +1,72 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Register API",
+    "description": "This API handles the register operation",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/irinaprocopciuc/register/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "paths": {
+    "/register/registerUser": {
+      "post": {
+        "tags": [
+          "registerUser"
+        ],
+        "summary": "Add a new user",
+        "description": "Insert a new user into the database",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Register succeeded."
+          },
+          "401": {
+            "description": "Register failed, user already exists or passwords do not match."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "body": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "user1"
+          },
+          "password": {
+            "type": "string",
+            "example": "pass"
+          },
+          "repassword": {
+            "type": "string",
+            "example": "pass"
+          },
+          "email": {
+            "type": "string",
+            "example": "user@gmail.com"
+          },
+          "name": {
+            "type": "string",
+            "example": "User"
+          }
+        }
+      }
+    }
+  }
+}

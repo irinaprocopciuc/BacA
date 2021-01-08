@@ -1,0 +1,167 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Trip API",
+    "description": "This API handles the trips for a specific user",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/irinaprocopciuc/trip/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "paths": {
+    "/trip/getTrips/userID={userId}": {
+      "get": {
+        "tags": [
+          "tripsList"
+        ],
+        "summary": "Get a list of trips for a user",
+        "description": "Search all trips for a user",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trips retrieved."
+          },
+          "405": {
+            "description": "Failed to retrieve trips, user not authorized."
+          }
+        }
+      }
+    },
+    "/trip/getTrip/tripID={tripId}": {
+      "get": {
+        "tags": [
+          "tripDetails"
+        ],
+        "summary": "Get details for a specific trip by its id",
+        "description": "Search the details for a trip",
+        "parameters": [
+          {
+            "name": "tripId",
+            "in": "path",
+            "description": "The trip id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trip details retrieved."
+          },
+          "404": {
+            "description": "Trip details not found."
+          },
+          "405": {
+            "description": "Failed to retrieve trip details, trip id incorrect!"
+          }
+        }
+      }
+    },
+    "/trip/addTrip": {
+      "post": {
+        "tags": [
+          "addTrip"
+        ],
+        "summary": "Add a new trip",
+        "description": "Update table trip by adding new trip details",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Trip added successfully."
+          },
+          "401": {
+            "description": "Trip already exists."
+          }
+        }
+      }
+    },
+    "/trip/deleteTrip/tripId={tripId}": {
+      "delete": {
+        "tags": [
+          "deleteTrip"
+        ],
+        "summary": "Delete a trip",
+        "description": "Delete a trip by id",
+        "parameters": [
+          {
+            "name": "tripId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trip deleted."
+          },
+          "400": {
+            "description": "Trip not deleted, bad request."
+          },
+          "405": {
+            "description": "Trip id incorrect."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "body": {
+        "type": "object",
+        "properties": {
+          "tripName": {
+            "type": "string",
+            "example": "Trip one"
+          },
+          "destination": {
+            "type": "string",
+            "example": "destination"
+          },
+          "startDate": {
+            "type": "string",
+            "example": "2020-11-11"
+          },
+          "endDate": {
+            "type": "string",
+            "example": "2020-12-11"
+          },
+          "userId": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      }
+    }
+  }
+}
