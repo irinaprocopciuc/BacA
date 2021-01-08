@@ -5,7 +5,9 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jasmine",
-      "googlemaps"
+      "mapboxgl",
+      "node",
+      "mapboxSdk"
     ]
   },
   "files": [

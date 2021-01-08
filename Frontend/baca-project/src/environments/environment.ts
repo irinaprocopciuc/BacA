@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost:8080'
+  url: 'http://localhost:8080',
+  mapAccessToken: 'pk.eyJ1IjoiaXJpbmExMyIsImEiOiJja2pvYXZkZjgydjVvMnlsb3p6aGNuNmRmIn0.jC6Xej6u1QeZ27lFPgT6nw'
 };
 
 /*

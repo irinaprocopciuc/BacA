@@ -3,7 +3,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": ["googlemaps"]
+    "types": ["mapboxgl", "node", "mapboxSdk"]
   },
   "files": [
     "src/main.ts",
