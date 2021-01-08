@@ -18,8 +18,8 @@ export class LoginRegisterService {
     this.isLoggedIn$ = new BehaviorSubject<boolean>(true);
   }
 
-  get isLoggedIn() {
-    return this.isLoggedIn$.asObservable();
+  getIsLoggedIn() {
+    return this.isLoggedIn$;
   }
 
   setIsLoggedIn(newSatate) {
@@ -27,7 +27,7 @@ export class LoginRegisterService {
   }
 
   setCurrentUser(user) {
-    localStorage.setItem('userId', user);
+    localStorage.setItem('userId', JSON.stringify(user));
   }
 
   getCurrentUser() {
@@ -36,7 +36,6 @@ export class LoginRegisterService {
 
   loginUser(loginObj: LoginObject) {
     if (loginObj.username !== '' && loginObj.password !== '') {
-      this.isLoggedIn$.next(true);
       return this.http.post(`${this.baseUrl}/login/checkUser`, {
         ...loginObj,
       });
@@ -51,8 +50,8 @@ export class LoginRegisterService {
 
   logout() {
     if (confirm('Are you sure you want to logout?')) {
-      this.isLoggedIn$.next(false);
-      this.setCurrentUser(null);
+      this.setIsLoggedIn(false);
+      this.setCurrentUser('noUser');
       this.router.navigate(['login']);
     }
   }

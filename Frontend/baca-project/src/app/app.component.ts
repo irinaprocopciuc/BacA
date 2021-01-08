@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   title = 'baca-project';
-  isLoggedIn$: Observable<boolean>;
+  isLoggedIn: boolean;
 
   constructor(
     public readonly loginService: LoginRegisterService,
@@ -18,11 +18,20 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.isLoggedIn$ = this.loginService.isLoggedIn;
+    setTimeout(() => {
+      this.loginService.getIsLoggedIn().subscribe(value => {
+        this.isLoggedIn = value;
+      })
+    }, 500);
   }
 
   logout(): void {
     this.loginService.logout();
+    this.isLoggedIn = false;
+  }
+
+  login(): void {
+    this.router.navigate(['login']);
   }
 
   navigateToTripList(): void {

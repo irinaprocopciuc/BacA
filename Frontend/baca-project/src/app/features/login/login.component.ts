@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
       username: [null, Validators.required],
       password: [null, Validators.required],
     });
+    this.loginService.setIsLoggedIn(false);
   }
 
   login(): void {
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
           this.errorService.displaySuccessToast(resp['message'], '');
           this.router.navigate(['homepage']);
           this.loginService.setCurrentUser(resp['userId']);
+          this.loginService.setIsLoggedIn(true);
         }
       },
       (err) => {

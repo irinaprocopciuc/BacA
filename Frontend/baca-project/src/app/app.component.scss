@@ -1,6 +1,10 @@
 .app-header {
   display: flex;
   justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 
   span {
     outline: none;
@@ -8,14 +12,13 @@
       color: #f6f0fa;
     }
   }
-}
 
-.login-register-btn {
-  display: flex;
-  flex-direction: row;
-   span {
-     margin-right: 20px;
-     cursor: pointer;
-   }
+  .login-register-btn {
+    display: flex;
+    flex-direction: row;
+     span {
+       margin-right: 20px;
+       cursor: pointer;
+     }
+  }
 }
-

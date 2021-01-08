@@ -58,7 +58,6 @@ export class AddTripComponent implements OnInit {
       new Date(trip.endDate),
       'yyyy-MM-dd'
     );
-    console.log(trip);
     this.tripService.addNewTrip(trip).subscribe(
       (res) => {
         if (res['code'] === '200') {
