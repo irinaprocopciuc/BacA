@@ -17,6 +17,8 @@ export class TripDetailsComponent implements OnInit {
   tripDetails: TripDetails;
   currentLat: number;
   currentLng: number;
+  currentCountry: string;
+  emergencyNumber: string;
   currentLocation;
   startingPointLat: number;
   startingPointLng: number;
@@ -47,6 +49,16 @@ export class TripDetailsComponent implements OnInit {
       .getCityDetails(this.tripDetails?.destination)
       .subscribe((list) => {
         let cityCode = list.locationSearchResult['0'].cityCode;
+
+        this.placeService.getHotels({
+          cityCode: cityCode,
+          rooms: [{ADT: 1}],
+          arrivalDate: this.tripDetails.startDate,
+          leaveDate: this.tripDetails.endDate,
+          nationality: 'HU'
+        }).subscribe(res => {
+          //console.log(res);
+        })
       });
   }
 
@@ -69,6 +81,11 @@ export class TripDetailsComponent implements OnInit {
 
       this.getCityDetails();
     });
+    /*TODO TEST DATA START - TO BE REMOVED*/
+    this.emergencyNumber = '000';
+    this.currentCountry = "US";
+    /*TEST DATA END - TO BE REMOVED */
+    this.getCurrentLocationEmergencyNumber();
   }
 
   getStartingPointLocation(locationName): void {
@@ -173,4 +190,70 @@ export class TripDetailsComponent implements OnInit {
       });
     }
   }
+
+
+
+
+
+  //**EMERGENCY NUMBER EXTRACTION FROM EMERGENCY API BETA - BEGINNING*/
+
+  getCountryCodeFromJSON(locationName): void{
+    let destinationCode;
+    let short_name = null;
+    let i=0;
+    //TODO REMOVE THE CLOGS
+    //console.log("Destination Code :"+ JSON.stringify(destinationCode));
+    while(short_name == null){
+      destinationCode = locationName.context[i];
+      //TODO REMOVE THE CLOGS
+      //console.log("SCTEST: " +JSON.stringify(destinationCode));
+      //console.log("SCTEST: " +JSON.stringify(destinationCode.short_code));
+      if(destinationCode.short_code !== 'undefined')
+        short_name = destinationCode.short_code;
+      i++;
+    }
+    //TODO REMOVE THE CLOGS
+    //console.log("Short Country Name :"+short_name.trim().substring(0, 2));
+    return short_name.trim().substring(0, 2);
+
+
+  }
+  getCurrentLocationCountryCode(): void{
+    //console.log("Trip destination:"+ this.tripDetails?.destination.toString());
+    this.mapService
+        .getPlacesForName(this.tripDetails?.destination.toString())
+        .subscribe((placesList) => {
+           //TODO REMOVE THE CLOGS
+            //console.log(placesList['features'][0]);
+            //console.log("Current country code after edit: "+ this.currentCountry);
+          //TODO return this.getCountryCodeFromJSON(placesList['features'][0].toString());
+        });
+  }
+  getEmergencyNumberFromData(emergencyData): string{
+    //TODO REMOVE THE CLOGS
+    //console.log(JSON.stringify(emergencyData));
+    let datanumber = emergencyData['data'];
+    //TODO REMOVE THE CLOGS
+    //console.log(JSON.stringify(datanumber));
+    let isMember112 = datanumber['member_112'];
+    if(isMember112 == true)
+      return '112';
+    else{
+      let emergencyDispatchNumber = datanumber['dispatch']['all'];
+        return emergencyDispatchNumber;
+    }
+    return '000';
+  }
+
+  getCurrentLocationEmergencyNumber(): void{
+    this.getCurrentLocationCountryCode();
+    this.tripService.getTripLocationEmergencyData(this.currentCountry).subscribe((resp)=>{
+      this.emergencyNumber = this.getEmergencyNumberFromData(resp);
+      //TODO REMOVE THE CLOGS
+      //console.log(JSON.stringify(resp));
+      //console.log("Emergency Number: "+this.emergencyNumber);
+    });
+  }
+
+  //**EMERGENCY NUMBER EXTRACTION FROM EMERGENCY API BETA - END*/
 }
