@@ -41,6 +41,7 @@ export class AddTripComponent implements OnInit {
   ngOnInit(): void {
     this.addForm = this.fb.group({
       tripName: [null, Validators.required],
+      startingPoint: [null, Validators.required],
       destination: [null, Validators.required],
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
