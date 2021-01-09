@@ -4,5 +4,11 @@
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
+    },
+    "/v2.0/hotels/*": {
+        "target": "https://dev.allmyles.com/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
     }
 }

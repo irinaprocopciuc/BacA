@@ -123,12 +123,12 @@ export class TripDetailsComponent implements OnInit {
            //TODO REMOVE THE CLOGS
             //console.log(placesList['features'][0]);
             //console.log("Current country code after edit: "+ this.currentCountry);
-          return this.getCountryCodeFromJSON(placesList['features'][0]).toString();
+          //TODO return this.getCountryCodeFromJSON(placesList['features'][0].toString());
         });
   }
   getEmergencyNumberFromData(emergencyData): string{
     //TODO REMOVE THE CLOGS
-    console.log(JSON.stringify(emergencyData));
+    //console.log(JSON.stringify(emergencyData));
     let datanumber = emergencyData['data'];
     //TODO REMOVE THE CLOGS
     //console.log(JSON.stringify(datanumber));
