@@ -1,0 +1,8 @@
+{
+    "/api/country/*": {
+        "target": "http://emergencynumberapi.com/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}
