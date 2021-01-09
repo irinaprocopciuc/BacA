@@ -19,6 +19,21 @@
       <mat-form-field class="add-form-field">
         <input
           matInput
+          placeholder="Starting Point"
+          formControlName="startingPoint"
+        />
+        <mat-error
+          *ngIf="
+            !addForm.controls['startingPoint'].valid &&
+            addForm.controls['startingPoint'].touched
+          "
+        >
+          Destination is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="add-form-field">
+        <input
+          matInput
           placeholder="Destination"
           formControlName="destination"
         />

@@ -34,16 +34,17 @@ public class Trip implements TripInterface {
 			try {
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(
-						"select idtrip, tripName, destination, startDate, endDate, userId from trip where userId = "
+						"select idtrip, tripName, startingPoint, destination, startDate, endDate, userId from trip where userId = "
 								+ userID + ";");
 				while (rs.next()) {
 					Map<String, String> trip = new HashMap<>();
 					trip.put("idtrip", rs.getString(1));
 					trip.put("tripName", rs.getString(2));
-					trip.put("destination", rs.getString(3));
-					trip.put("startDate", rs.getString(4));
-					trip.put("endDate", rs.getString(5));
-					trip.put("userId", rs.getString(6));
+					trip.put("startingPoint", rs.getString(3));
+					trip.put("destination", rs.getString(4));
+					trip.put("startDate", rs.getString(5));
+					trip.put("endDate", rs.getString(6));
+					trip.put("userId", rs.getString(7));
 					tripsList.add(trip);
 				}
 				return tripsList;
@@ -64,16 +65,17 @@ public class Trip implements TripInterface {
 			try {
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(
-						"select idtrip, tripName, destination, startDate, endDate, userId from trip where idtrip = "
+						"select idtrip, tripName, startingPoint, destination, startDate, endDate, userId from trip where idtrip = "
 								+ tripID + ";");
 				while (rs.next()) {
 					trip = new HashMap<>();
 					trip.put("idtrip", rs.getString(1));
 					trip.put("tripName", rs.getString(2));
-					trip.put("destination", rs.getString(3));
-					trip.put("startDate", rs.getString(4));
-					trip.put("endDate", rs.getString(5));
-					trip.put("userId", rs.getString(6));
+					trip.put("startingPoint", rs.getString(3));
+					trip.put("destination", rs.getString(4));
+					trip.put("startDate", rs.getString(5));
+					trip.put("endDate", rs.getString(6));
+					trip.put("userId", rs.getString(7));
 				}
 				return trip;
 			} catch (SQLException e) {
@@ -105,8 +107,8 @@ public class Trip implements TripInterface {
 			try {
 				Statement stmt = conn.createStatement();
 				stmt.executeUpdate(
-						"insert into trip (idtrip, tripName, destination, startDate, endDate, userId) values ('"
-								+ tripID + "', '" + credentials.getTripname() + "', '" + credentials.getDestination()
+						"insert into trip (idtrip, tripName, startingPoint, destination, startDate, endDate, userId) values ('"
+								+ tripID + "', '" + credentials.getTripname() + "', '" + credentials.getStartingPoint() + "', '" + credentials.getDestination()
 								+ "', '" + credentials.getStartDate() + "', '" + credentials.getEndDate() + "', '"
 								+ credentials.getUserid() + "');");
 				return true;

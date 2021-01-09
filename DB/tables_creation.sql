@@ -11,6 +11,7 @@ CREATE TABLE `baca`.`user` (
 CREATE TABLE `baca`.`trip` (
   `idtrip` INT NOT NULL,
   `tripName` VARCHAR(45) NOT NULL,
+  `startingPoint` VARCHAR(45) NOT NULL,
   `destination` VARCHAR(45) NOT NULL,
   `startDate` DATE NOT NULL,
   `endDate` DATE NOT NULL,
