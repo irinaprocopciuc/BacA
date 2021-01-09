@@ -27,4 +27,7 @@ export class TripService {
   getTripDetails(tripId: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/trip/getTrip/tripID=${tripId}`);
   }
+  getTripLocationEmergencyData(countryCode:string){
+    return this.http.get(`/api/country/${countryCode}`);
+  }
 }
