@@ -10,11 +10,11 @@ public class RegisterDetails {
 	private final String username;
 
 	@NotBlank(message = "Password is blank")
-	//@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", message = "Password is not valid")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", message = "Password is not valid")
 	private final String password;
 
 	@NotBlank(message = "Repassword is blank")
-	//@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", message = "Repassword is not valid")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", message = "Repassword is not valid")
 	private final String rePassword;
 
 	@NotBlank(message = "Name is blank")
