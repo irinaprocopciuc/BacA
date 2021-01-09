@@ -99,30 +99,30 @@ export class TripDetailsComponent implements OnInit {
     let short_name = null;
     let i=0;
     //TODO REMOVE THE CLOGS
-    console.log("Destination Code :"+ JSON.stringify(destinationCode));
+    //console.log("Destination Code :"+ JSON.stringify(destinationCode));
     while(short_name == null){
       destinationCode = locationName.context[i];
       //TODO REMOVE THE CLOGS
-      console.log("SCTEST: " +JSON.stringify(destinationCode));
-      console.log("SCTEST: " +JSON.stringify(destinationCode.short_code));
+      //console.log("SCTEST: " +JSON.stringify(destinationCode));
+      //console.log("SCTEST: " +JSON.stringify(destinationCode.short_code));
       if(destinationCode.short_code !== 'undefined')
         short_name = destinationCode.short_code;
       i++;
     }
     //TODO REMOVE THE CLOGS
-    console.log("Short Country Name :"+short_name.trim().substring(0, 2));
+    //console.log("Short Country Name :"+short_name.trim().substring(0, 2));
     return short_name.trim().substring(0, 2);
 
 
   }
   getCurrentLocationCountryCode(): string{
-    console.log("Trip destination:"+ this.tripDetails?.destination.toString());
+    //console.log("Trip destination:"+ this.tripDetails?.destination.toString());
     this.mapService
         .getPlacesForName(this.tripDetails?.destination.toString())
         .subscribe((placesList) => {
            //TODO REMOVE THE CLOGS
-            console.log(placesList['features'][0]);
-            console.log("Current country code after edit: "+ this.currentCountry);
+            //console.log(placesList['features'][0]);
+            //console.log("Current country code after edit: "+ this.currentCountry);
           return this.getCountryCodeFromJSON(placesList['features'][0]).toString();
         });
   }
@@ -131,7 +131,7 @@ export class TripDetailsComponent implements OnInit {
     console.log(JSON.stringify(emergencyData));
     let datanumber = emergencyData['data'];
     //TODO REMOVE THE CLOGS
-    console.log(JSON.stringify(datanumber));
+    //console.log(JSON.stringify(datanumber));
     let isMember112 = datanumber['member_112'];
     if(isMember112 == true)
       return '112';
@@ -147,8 +147,8 @@ export class TripDetailsComponent implements OnInit {
     this.tripService.getTripLocationEmergencyData(this.currentCountry).subscribe((resp)=>{
       this.emergencyNumber = this.getEmergencyNumberFromData(resp);
       //TODO REMOVE THE CLOGS
-      console.log(JSON.stringify(resp));
-      console.log("Emergency Number: "+this.emergencyNumber);
+      //console.log(JSON.stringify(resp));
+      //console.log("Emergency Number: "+this.emergencyNumber);
     });
   }
 
