@@ -1,3 +1,4 @@
+import { PlaceService } from './../../core/services/place.service';
 import { MapService } from './../../core/services/map.service';
 import { environment } from './../../../environments/environment';
 import { TripDetails } from 'src/app/core/models/TripDetails';
@@ -6,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-
 @Component({
   selector: 'app-trip-details',
   templateUrl: './trip-details.component.html',
@@ -25,13 +25,26 @@ export class TripDetailsComponent implements OnInit {
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly tripService: TripService,
-    private readonly mapService: MapService
+    private readonly mapService: MapService,
+    private readonly placeService: PlaceService
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((param) => {
       this.tripId = param.tripId;
     });
+    this.getTripDetails();
+  }
+
+  getCityDetails(): void {
+    this.placeService
+      .getCityDetails(this.tripDetails?.destination)
+      .subscribe((list) => {
+        let cityCode = list.locationSearchResult['0'].cityCode;
+      });
+  }
+
+  getTripDetails(): void {
     this.getCurrentLocation();
     this.tripService.getTripDetails(Number(this.tripId)).subscribe((resp) => {
       this.tripDetails = resp.response;
@@ -41,6 +54,8 @@ export class TripDetailsComponent implements OnInit {
         .subscribe((placesList) => {
           this.getDestinationLocation(placesList['features'][0]);
         });
+
+      this.getCityDetails();
     });
   }
 
@@ -52,7 +67,7 @@ export class TripDetailsComponent implements OnInit {
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [destinationLng, destinationLat],
-      zoom: 9,
+      zoom: 2,
     });
 
     this.geocoder = new MapboxGeocoder({
@@ -64,6 +79,15 @@ export class TripDetailsComponent implements OnInit {
     });
 
     this.map.addControl(this.geocoder);
+
+    new mapboxgl.Marker()
+      .setLngLat([destinationLng, destinationLat])
+      .addTo(this.map);
+
+    new mapboxgl.Marker()
+      .setLngLat([this.currentLng, this.currentLat])
+      .addTo(this.map);
+
   }
 
   getCurrentLocation(): void {
