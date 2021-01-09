@@ -18,6 +18,12 @@ export class TripDetailsComponent implements OnInit {
   currentLat: number;
   currentLng: number;
   currentLocation;
+  startingPointLat: number;
+  startingPointLng: number;
+  startingLocationName: string;
+  destinationLat: number;
+  destinationLng: number;
+  destinationName: string;
   map;
   geocoder;
   mapboxClient;
@@ -50,6 +56,12 @@ export class TripDetailsComponent implements OnInit {
       this.tripDetails = resp.response;
 
       this.mapService
+        .getPlacesForName(this.tripDetails?.startingPoint.toString())
+        .subscribe((placesList) => {
+          this.getStartingPointLocation(placesList['features'][0]);
+        });
+
+      this.mapService
         .getPlacesForName(this.tripDetails?.destination.toString())
         .subscribe((placesList) => {
           this.getDestinationLocation(placesList['features'][0]);
@@ -59,35 +71,92 @@ export class TripDetailsComponent implements OnInit {
     });
   }
 
+  getStartingPointLocation(locationName): void {
+    this.startingPointLat = locationName.center['1'];
+    this.startingPointLng = locationName.center['0'];
+    this.startingLocationName = locationName.place_name;
+  }
+
   getDestinationLocation(locationName): void {
-    let destinationLng = locationName.center['0'];
-    let destinationLat = locationName.center['1'];
+    this.destinationLng = locationName.center['0'];
+    this.destinationLat = locationName.center['1'];
+    this.destinationName = locationName.place_name;
+    this.createMap();
+  }
+
+  createMap(): void {
     this.map = new mapboxgl.Map({
       accessToken: environment.mapAccessToken,
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [destinationLng, destinationLat],
-      zoom: 2,
+      center: [this.destinationLng, this.destinationLat],
+      zoom: 4,
     });
 
     this.geocoder = new MapboxGeocoder({
       accessToken: environment.mapAccessToken,
       marker: {
-        color: 'orange',
+        color: 'green',
       },
       mapboxgl: mapboxgl,
     });
 
     this.map.addControl(this.geocoder);
 
-    new mapboxgl.Marker()
-      .setLngLat([destinationLng, destinationLat])
+    this.addDestinationMarker();
+    this.addCurrentLocationMarker();
+    this.addStartingPointMarker();
+  }
+
+  addDestinationMarker(): void {
+    var popup1 = document.createElement('div');
+    popup1.className = 'marker';
+
+    var popupDestinationLocation = new mapboxgl.Popup().setHTML(
+      'User <strong> destination </strong> is: ' + this.destinationName
+    );
+
+    var markerDestination = new mapboxgl.Marker(popup1)
+      .setLngLat([this.destinationLng, this.destinationLat])
+      .setPopup(popupDestinationLocation)
       .addTo(this.map);
 
-    new mapboxgl.Marker()
+    popup1.onmouseenter = () => markerDestination.togglePopup();
+    popup1.onmouseleave = () => markerDestination.togglePopup();
+  }
+
+  addCurrentLocationMarker(): void {
+    var popup2 = document.createElement('div');
+    popup2.className = 'marker';
+
+    var popupCurrentLocation = new mapboxgl.Popup().setHTML(
+      'User  <strong>current</strong> location is: ' + this.currentLocation
+    );
+
+    var markerCurrentLocation = new mapboxgl.Marker(popup2)
       .setLngLat([this.currentLng, this.currentLat])
+      .setPopup(popupCurrentLocation)
       .addTo(this.map);
 
+    popup2.onmouseenter = () => markerCurrentLocation.togglePopup();
+    popup2.onmouseleave = () => markerCurrentLocation.togglePopup();
+  }
+
+  addStartingPointMarker(): void {
+    var popup3 = document.createElement('div');
+    popup3.className = 'marker';
+
+    var popupStartingPoint = new mapboxgl.Popup().setHTML(
+      'User  <strong>starting point</strong> is: ' + this.startingLocationName
+    );
+
+    var markerStartingPoint = new mapboxgl.Marker(popup3)
+      .setLngLat([this.startingPointLng, this.startingPointLat])
+      .setPopup(popupStartingPoint)
+      .addTo(this.map);
+
+    popup3.onmouseenter = () => markerStartingPoint.togglePopup();
+    popup3.onmouseleave = () => markerStartingPoint.togglePopup();
   }
 
   getCurrentLocation(): void {
