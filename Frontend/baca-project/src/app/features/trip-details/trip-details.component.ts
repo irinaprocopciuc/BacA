@@ -50,15 +50,15 @@ export class TripDetailsComponent implements OnInit {
       .subscribe((list) => {
         let cityCode = list.locationSearchResult['0'].cityCode;
 
-        this.placeService.getHotels({
-          cityCode: cityCode,
-          rooms: [{ADT: 1}],
-          arrivalDate: this.tripDetails.startDate,
-          leaveDate: this.tripDetails.endDate,
-          nationality: 'HU'
-        }).subscribe(res => {
-          //console.log(res);
-        })
+        // this.placeService.getHotels({
+        //   cityCode: cityCode,
+        //   rooms: [{ADT: 1}],
+        //   arrivalDate: this.tripDetails.startDate,
+        //   leaveDate: this.tripDetails.endDate,
+        //   nationality: 'HU'
+        // }).subscribe(res => {
+        //   console.log(res);
+        // })
       });
   }
 
