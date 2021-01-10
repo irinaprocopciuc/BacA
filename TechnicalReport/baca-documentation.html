@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://w3c.github.io/scholarly-html/css/scholarly.min.css">
+    <link rel="stylesheet" href="baca-style.scss">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
@@ -202,7 +203,7 @@
         <hr>
         <br>
         <h3 id="Structure" class="text-info">Architecture</h3>
-        <img src="assets/architecture_diagram.png" class="img-fluid mt-4 mb-4" alt="UseCaseLogin">
+        <img src="General architecture/architecture_diagram.png" class="img-fluid mt-4 mb-4" id="architecture" alt="UseCaseLogin">
         <p>
             As we can see, the architecture of the application is implemented based on the following elements :
              Client (Web browser and mobile browser), Angular frontend application, Appi, Java with Spring Boot backend and MySQL database.
@@ -226,7 +227,7 @@
                    Maps Javascript API, Trimble Trip API and Allmyles API. With the help of API we can find details 
                    like where is a person accomodated, located, the shops and hospitals around or a police station 
                    that he or she can go to. 
-                   Also, the frontend application will communicate with the backend through some API made by us.
+                   Also, the frontend application will communicate with the backend through some REST APIs made by us.
                 </p>
             </section>
             <section id="API">
@@ -256,34 +257,58 @@
         <p>In this chapter, we are going to give some details about the pages that the user will interact with.</p>
         <h4 id="front-end" class="text-info">Login page</h4>
         <p>
-            On the login page, the user can be authenticated into the application. The user has two more options: 
-            the case in which he is not registered, he can register, and if he forgets his authentication details, 
-            in this case, the password, he can request his password to be reset.  
+            On the login page, the user can be authenticated into the application. If he has previously created an account, he can fill
+            the login form with the needed credentials and he will be loged into the application. In case the user doen't have an account,
+            he can press the Register button and go to Register page to fill in the details of his new account.
             The two fields required for the login are the username and the password.
-            <img src="assets/update_user_login.png" class="img-fluid mt-4 mb-4" alt="LoginPage">
+            <img src="User intercation/User interaction-update/login.png" class="img-fluid mt-4 mb-4" alt="LoginPage">
         </p>
         <h4 id="front-end" class="text-info">Register page</h4>
-        <p>On the register page, new users can create new accounts. 
-            The fields required for this process will be the name, username, email, password and confirm password. </p>
-            <img src="assets/update_user_register.png" class="img-fluid mt-4 mb-4" alt="RegisterPage">
+        <p>On the register page, the users can create a new account. 
+            The fields required for this process will be the name, username, email, password and confirm password.
+            In case of the password validation, the user should add a password which contains small letters, uppercase letters and numbers.
+            After filling all these details he can press the Register button and he will receive a confirmation if the register 
+            was done successfully. Otherwise, an error will appear and the user has to fill the form correctly.
+            In case he wants to fil the form again, he can press the Cancel button and all the fields will be cleared. 
+            Or, if he remembers he already has an account, he can go back to login page.
+        </p>
+            <img src="User intercation/User interaction-update/register.png" class="img-fluid mt-4 mb-4" alt="RegisterPage">
         
             <h4 id="front-end" class="text-info">Home page</h4>
-            <p>On the Home page, the user can see a message that sounds like "Find the best travel deals..." and
-                simply navigate to pages like: Trips, New trip and Logout
+            <p>On the Homepage, the user can see a message that sounds like "Find the best travel deals..." and he will be able to 
+                simply navigate to pages like: Trips, New trip and Logout from he applications' header.
         </p>
-            <img src="assets/update_home_page.png" class="img-fluid mt-4 mb-4" alt="HomePage">
+            <img src="User intercation/User interaction-update/homepage.png" class="img-fluid mt-4 mb-4" alt="HomePage">
+        <h4 id="front-end" class="text-info">New trip</h4>
+        <p>On the New trip page the user can add a new trip that contains the name of the trip, a starting point and
+            the final destination. He shouls also choosea start date and an end date for his trip. This new trip can be actually the next trip 
+            that the user will go through and it will appear on the Trips page after after all the steps from new trip page 
+            will be completted. If all the details for the trip are completed, all form fields being required, a success toaster wil appear
+            announcing the user that his trip was added to the list and the user will be redirected to the Trips page. Otherwise, the 
+            user remains on the New trip page and an error is shown.
+        <img src="User intercation/User interaction-update/add_new_trip.png" class="img-fluid mt-4 mb-4" alt="NewTrip">
+        </p>
+        <h4 id="front-end" class="text-info">Trips page</h4>
+        <p>
+            On the Trips page the user can see a list of all his planned trips. For each trip he will see just a small amount of information,
+            like the trip name, the period in which the trip will take place and the starting point and destination. 
+            For each trip there are also present two button: View details and Delete trip. If the user presses the second button 
+            he can delete a trip if he presses the Ok button from the confirmation dialog. If the user wants to see more details about
+            a specific trip he should press the View details button and he will be redirected to the Trip details page.
+            <img src="User intercation/User interaction-update/trips.PNG" class="img-fluid mt-4 mb-4" alt="Trips">
+        </p>
         <h4 id="front-end" class="text-info">Trip details page</h4>
         <p>
-            On the trip details page, the user can see the message : "Find the best travel deals..." and 
-            can simply navigate to pages like: Trips, New trip and Logout.
-            <img src="assets/update_trip_details.png" class="img-fluid mt-4 mb-4" alt="Trip details">
-        </p>
-        <h4 id="front-end" class="text-info">New trip</h4>
-            <p>On the new trip, the user can add a new trip tat contains the name of the trip, a starting point,
-                a destination, choosing a start data and choosing an end date. This new trip is actually the next trip 
-                that the user will go through and it will appear on the "Trips" page after after all the steps from new trip page 
-                will be completted.
-                <img src="assets/new_trip.png" class="img-fluid mt-4 mb-4" alt="NewTrip">
+            On the Trip details page the user will be able to find more details about his current elected trip. 
+            The main information presented here are the name of the trip and the current location of the user, the starting point for his trip and 
+            the final destination. Also, an emergency number corresponding to the destination of the user will appear, in case of some emergencies.
+            At the bottom of the page the user will find a map with three markers on it, the current location, the starting point and the destination
+            for the trip. If he puts the mouse over one of them a popup will appear and he will be able to see the exact locatio of each marker.
+            The map has a search integrated in it, in the right top corner of the map. This search allows user to find any attractions for his trip,
+            hotels, shops, parks by simply typying the name of them. He will be able to choose from a suggestions list for the typed term 
+            and the chosen element will be shown on the map with a green marker.   
+            <img src="User intercation/User interaction-update/trip_details.png" class="img-fluid mt-4 mb-4" alt="Trip details">
+            <img src="User intercation/User interaction-update/map_search.PNG" class="img-fluid mt-4 mb-4" alt="Map search">
         </p>
         <h3 id="Use-Cases" class="text-info">Use Cases</h3>
         <br>
@@ -291,7 +316,7 @@
             <li>
                 <span class="text-secondary"><code>Use case for user login</code></span>
                 <br>
-                <img src="assets/usecase_login.png" class="img-fluid mt-4 mb-4" alt="UseCaseLogin">
+                <img src="General architecture/Use cases/usecase_login.png" class="img-fluid mt-4 mb-4" alt="UseCaseLogin">
                 <br>
                 <p class="ml-4">The login into our application can be described by the following steps:</p>
                 <ul style="list-style-type:circle;">
@@ -323,7 +348,7 @@
             <li>
                 <span class="text-secondary"><code>Use case for Trip</code></span>
                 <br>
-                <img src="assets/usecase_trip.png" class="img-fluid mt-4 mb-4" alt="UseCaseTrip">
+                <img src="General architecture/Use cases/usecase_trip.png" class="img-fluid mt-4 mb-4" alt="UseCaseTrip">
                 <br>
                 <p class="ml-4">The operation logic for this use case can be described by the following steps:</p>
                 <ul style="list-style-type:circle;">
@@ -344,7 +369,7 @@
             <br>
             <li>
                 <span class="text-secondary"><code>Use case for TripDetails<br></code></span>
-                <img src="assets/usecase_tripdetails.png" class="img-fluid mt-4 mb-4" alt="UseCaseTripDetails">
+                <img src="General architecture/Use cases/usecase_tripdetails.png" class="img-fluid mt-4 mb-4" alt="UseCaseTripDetails">
                 <br>
                 <p class="ml-4">This use case can be described by the following steps:</p>
                 <ul style="list-style-type:circle;">
@@ -369,7 +394,7 @@
             <br>
             <li>
                 <span class="text-secondary"><code>Use case for Accommodation<br></code></span>
-                <img src="assets/usecase_accommodation.png" class="img-fluid mt-4 mb-4" alt="UseCaseAccommodation">
+                <img src="General architecture/Use cases/usecase_accommodation.png" class="img-fluid mt-4 mb-4" alt="UseCaseAccommodation">
                 <br>
                 <p class="ml-4">In this case we have the following steps:</p>
                 <ul style="list-style-type:circle;">
@@ -401,8 +426,8 @@
             <li><a href="https://developer.trimblemaps.com/" target="_blank">Trimble Trip API</a></li>
             <li> <a href="https://allmyles.docs.apiary.io/#reference/dashboard-api" target="_blank">Allmyles API</a>
             </li>
-            <li><a href="https://developers.google.com/maps/documentation/javascript/overview" target="_blank">Maps
-                    Javascript API</a>
+            <li>
+                <a href="https://docs.mapbox.com/api/overview/"> Mapbox Web API</a>
             </li>
         </ol>
         <hr>
