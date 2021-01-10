@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "baca-project"
+  "defaultProject": "baca-project",
+  "cli": {
+    "analytics": false
+  }
 }

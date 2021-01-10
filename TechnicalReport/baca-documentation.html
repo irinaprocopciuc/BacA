@@ -104,12 +104,9 @@
                     of the available components we will use from here are: navigation bar, button, input, card, menu.
                 </p>
             </li>
-            <li>
-                <span class="text-secondary"><code>Angular Google Maps</code></span>
-                <p class="ml-4">The Angular Google Maps library provides services and directives for implementing Google
-                    Maps services. There are directives available for creating maps, using markers and many others. It
-                    also provides an async function that is useful for checking if the Google Maps library is loaded on
-                    the webpage.</p>
+            
+            
+                
             </li>
             <li>
                 <span class="text-secondary"><code>ngx-charts</code></span>
@@ -152,6 +149,23 @@
         </p>
         <ul>
             <li>
+                <code>
+                    <a href="https://docs.mapbox.com/api/overview/" target="_blank">Mapbox maps service for web API</a>
+                </code>
+                <p>
+                    This API will provide us with a way to customize maps with our own content and imagery, allowing us
+                    to display the maps on web pages and mobile devices. 
+                </p>
+            </li>
+
+            <li>
+                <code> <a href="http://emergencynumberapi.com/" target="_blank">Emergency Number API</a></code>
+                <p>
+                    This API will give us informations about emergency numbers for any country in the world.
+                    
+                </p>
+            </li>
+            <li>
                 <code> <a href="https://api.fsapp.io/docs" target="_blank">Fantastic Stay API</a></code>
                 <p>
                     This API will give us informations about where the user stayed during his trip, if the reservation
@@ -182,17 +196,7 @@
                     will also provide us the nearest airport or the location of the hotel.
                 </p>
             </li>
-            <li>
-                <code>
-                    <a href="https://developers.google.com/maps/documentation/javascript/overview" target="_blank">Maps Javascript API</a>
-                </code>
-                <p>
-                    This API will provide us with a way to customize maps with our own content and imagery, allowing us
-                    to display the maps on web pages and mobile devices. The Maps Javascript API features four basic map
-                    types(roadmap, satellite, hybrid and terrain) which can be modified using layers and styles,
-                    controls and events, and various services and libraries.
-                </p>
-            </li>
+            
         </ul>
 
         <hr>
@@ -228,8 +232,9 @@
             <section id="API">
                 <h5>API</h5>
                 <p>
-                   We wil use some public API like Fantastic stay API, Maps Javascript API, Trimble Trip API and 
-                   Allmyles API to determine
+                   We wil use some public API like Mapbox maps service for web API, Emergency Number API, 
+                   Fantastic stay API,  Trimble Trip API and 
+                   Allmyles API.
                 </p>
             </section>
             <section id="Java">
@@ -255,26 +260,30 @@
             the case in which he is not registered, he can register, and if he forgets his authentication details, 
             in this case, the password, he can request his password to be reset.  
             The two fields required for the login are the username and the password.
-            <img src="assets/user_login.png" class="img-fluid mt-4 mb-4" alt="LoginPage">
+            <img src="assets/update_user_login.png" class="img-fluid mt-4 mb-4" alt="LoginPage">
         </p>
         <h4 id="front-end" class="text-info">Register page</h4>
         <p>On the register page, new users can create new accounts. 
-            The fields required for this process will be the username, password, email, and name. </p>
-            <img src="assets/user_register.png" class="img-fluid mt-4 mb-4" alt="RegisterPage">
-        <h4 id="front-end" class="text-info">Home page</h4>
-            On the home page, the user can see his current selected route, used for traveling at that moment. 
-        Also, the application will show him a history of routes used in the past or routes made by him for future hikes. 
-        The routes can be sorted, at least, by name, creation date, country. 
-        He can reuse them in the future if he comes again to a visited place or country.
-            <img src="assets/home_page.png" class="img-fluid mt-4 mb-4" alt="RoutesPage">
+            The fields required for this process will be the name, username, email, password and confirm password. </p>
+            <img src="assets/update_user_register.png" class="img-fluid mt-4 mb-4" alt="RegisterPage">
+        
+            <h4 id="front-end" class="text-info">Home page</h4>
+            <p>On the Home page, the user can see a message that sounds like "Find the best travel deals..." and
+                simply navigate to pages like: Trips, New trip and Logout
+        </p>
+            <img src="assets/update_home_page.png" class="img-fluid mt-4 mb-4" alt="HomePage">
         <h4 id="front-end" class="text-info">Trip details page</h4>
         <p>
-            On the trip details page, the user can see details about the trip he will go into, like the starting point, 
-            the destination, and the points of interest suggested by the application. He can show them on the map or pin 
-            them permanently for going there during the travel through his route. On the other side of the page, a map will 
-            show the user the route with all the modifications. Also, he will see the emergency number of the country or 
-            region where he will trip.
-            <img src="assets/detail_page.png" class="img-fluid mt-4 mb-4" alt="TripDetailPage">
+            On the trip details page, the user can see the message : "Find the best travel deals..." and 
+            can simply navigate to pages like: Trips, New trip and Logout.
+            <img src="assets/update_trip_details.png" class="img-fluid mt-4 mb-4" alt="Trip details">
+        </p>
+        <h4 id="front-end" class="text-info">New trip</h4>
+            <p>On the new trip, the user can add a new trip tat contains the name of the trip, a starting point,
+                a destination, choosing a start data and choosing an end date. This new trip is actually the next trip 
+                that the user will go through and it will appear on the "Trips" page after after all the steps from new trip page 
+                will be completted.
+                <img src="assets/new_trip.png" class="img-fluid mt-4 mb-4" alt="NewTrip">
         </p>
         <h3 id="Use-Cases" class="text-info">Use Cases</h3>
         <br>
