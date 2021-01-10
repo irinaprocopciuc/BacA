@@ -1,13 +1,12 @@
-import { PlaceService } from './../../core/services/place.service';
 import { MapService } from './../../core/services/map.service';
 import { environment } from './../../../environments/environment';
 import { TripDetails } from 'src/app/core/models/TripDetails';
 import { TripService } from './../../core/services/trip.service';
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import { log } from 'console';
+
 @Component({
   selector: 'app-trip-details',
   templateUrl: './trip-details.component.html',
@@ -34,8 +33,7 @@ export class TripDetailsComponent implements OnInit {
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly tripService: TripService,
-    private readonly mapService: MapService,
-    private readonly placeService: PlaceService
+    private readonly mapService: MapService
   ) {}
 
   ngOnInit(): void {
@@ -43,24 +41,6 @@ export class TripDetailsComponent implements OnInit {
       this.tripId = param.tripId;
     });
     this.getTripDetails();
-  }
-
-  getCityDetails(): void {
-    this.placeService
-      .getCityDetails(this.tripDetails?.destination)
-      .subscribe((list) => {
-        let cityCode = list.locationSearchResult['0'].cityCode;
-
-        // this.placeService.getHotels({
-        //   cityCode: cityCode,
-        //   rooms: [{ADT: 1}],
-        //   arrivalDate: this.tripDetails.startDate,
-        //   leaveDate: this.tripDetails.endDate,
-        //   nationality: 'HU'
-        // }).subscribe(res => {
-        //   console.log(res);
-        // })
-      });
   }
 
   getTripDetails(): void {
@@ -79,12 +59,10 @@ export class TripDetailsComponent implements OnInit {
         .subscribe((placesList) => {
           this.getDestinationLocation(placesList['features'][0]);
         });
-
-      this.getCityDetails();
     });
 
     this.emergencyNumber = '000';
-    this.currentCountry = "US";
+    this.currentCountry = 'US';
 
     this.getCurrentLocationEmergencyNumber();
   }
@@ -192,9 +170,7 @@ export class TripDetailsComponent implements OnInit {
     }
   }
 
-  //**EMERGENCY NUMBER EXTRACTION FROM EMERGENCY API BETA - BEGINNING*/
-
-  getCurrentLocationEmergencyNumber(): void{
+  getCurrentLocationEmergencyNumber(): void {
     this.getCurrentLocation();
     this.tripService.getTripDetails(Number(this.tripId)).subscribe((resp) => {
       this.tripDetails = resp.response;
@@ -202,54 +178,49 @@ export class TripDetailsComponent implements OnInit {
       this.mapService
         .getPlacesForName(this.tripDetails?.destination)
         .subscribe((placesList) => {
-            let code = this.getCountryCodeFromJSON(placesList['features'][0]);
-            this.currentCountry = code;
-      console.log("This is the corrent contry code :"+ this.currentCountry)
-      this.tripService.getTripLocationEmergencyData(this.currentCountry).subscribe((resp)=>{
-      this.emergencyNumber = this.getEmergencyNumberFromData(resp);
-          });
+          let code = this.getCountryCodeFromJSON(placesList['features'][0]);
+          this.currentCountry = code;
+          this.tripService
+            .getTripLocationEmergencyData(this.currentCountry)
+            .subscribe((resp) => {
+              this.emergencyNumber = this.getEmergencyNumberFromData(resp);
+            });
         });
-    });   
+    });
   }
 
-  getCountryCodeFromJSON(locationName): string{
+  getCountryCodeFromJSON(locationName): string {
     let destinationCode;
     let short_name = null;
-    let i=0;
+    let i = 0;
     let tempShortNameFromProperties = locationName.properties;
-    console.log("Prop location name"+JSON.stringify(tempShortNameFromProperties));
-    console.log("destination test : "+tempShortNameFromProperties.short_code);
     let countryShortCode = tempShortNameFromProperties.short_code;
-    if(countryShortCode !== 'undefined')
-        short_name = tempShortNameFromProperties.short_code;
-    while(short_name == null){
-        destinationCode = locationName.context[i];
-        if(destinationCode.short_code !== 'undefined')
-          short_name = destinationCode.short_code;
-        i++;
-      }
+    if (countryShortCode !== 'undefined')
+      short_name = tempShortNameFromProperties.short_code;
+    while (short_name == null) {
+      destinationCode = locationName.context[i];
+      if (destinationCode.short_code !== 'undefined')
+        short_name = destinationCode.short_code;
+      i++;
+    }
     return short_name.trim().substring(0, 2);
   }
-  getCurrentLocationCountryCode() : void{
+  getCurrentLocationCountryCode(): void {
     this.mapService
-        .getPlacesForName(this.tripDetails?.destination.toString())
-        .subscribe((placesList) => {
-            console.log(placesList['features'][0]);
-            var code = this.getCountryCodeFromJSON(placesList['features'][0]);
-            console.log("Code :" + code);
-            this.currentCountry = code;
-        });
+      .getPlacesForName(this.tripDetails?.destination.toString())
+      .subscribe((placesList) => {
+        var code = this.getCountryCodeFromJSON(placesList['features'][0]);
+        this.currentCountry = code;
+      });
   }
-  getEmergencyNumberFromData(emergencyData): string{
+  getEmergencyNumberFromData(emergencyData): string {
     let datanumber = emergencyData['data'];
     let isMember112 = datanumber['member_112'];
-    if(isMember112 == true)
-      return '112';
-    else{
+    if (isMember112 == true) return '112';
+    else {
       let emergencyDispatchNumber = datanumber['dispatch']['all'];
-        return emergencyDispatchNumber;
+      return emergencyDispatchNumber;
     }
     return '000';
   }
-  //**EMERGENCY NUMBER EXTRACTION FROM EMERGENCY API BETA - END*/
 }

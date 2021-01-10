@@ -1,5 +1,4 @@
 import { ErrorHandlingService } from './../../core/services/error-handling.service';
-import { ToastrService } from 'ngx-toastr';
 import { LoginRegisterService } from './../../core/services/login-register.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

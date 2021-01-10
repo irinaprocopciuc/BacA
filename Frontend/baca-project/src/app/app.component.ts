@@ -1,7 +1,6 @@
 import { LoginRegisterService } from './core/services/login-register.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,9 +18,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.loginService.getIsLoggedIn().subscribe(value => {
+      this.loginService.getIsLoggedIn().subscribe((value) => {
         this.isLoggedIn = value;
-      })
+      });
     }, 500);
   }
 
@@ -34,7 +33,7 @@ export class AppComponent implements OnInit {
   }
 
   navigateToTripList(): void {
-    this.router.navigate(['tripsList'])
+    this.router.navigate(['tripsList']);
   }
 
   navigateToAddForm(): void {

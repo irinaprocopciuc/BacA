@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
           this.errorService.displayErrorToast(err.error.message, '');
         }
       }
-    )
+    );
   }
 
   onReset(): void {

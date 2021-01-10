@@ -5,10 +5,7 @@
 export const environment = {
   production: false,
   url: 'http://localhost:8080',
-  mapAccessToken: 'pk.eyJ1IjoiaXJpbmExMyIsImEiOiJja2pvYXZkZjgydjVvMnlsb3p6aGNuNmRmIn0.jC6Xej6u1QeZ27lFPgT6nw',
-  airlabsAPIkey: '95650ce8-639d-4ff8-b6cc-2fc6db7154df',
-  allmylesAPIkey: '6f265b0b-3dac',
-  amadeusAPIkey: 'G7AR7c3NE5eAhNikm8XXsWLleydSjUPq'
+  mapAccessToken: 'pk.eyJ1IjoiaXJpbmExMyIsImEiOiJja2pvYXZkZjgydjVvMnlsb3p6aGNuNmRmIn0.jC6Xej6u1QeZ27lFPgT6nw'
 };
 
 /*
