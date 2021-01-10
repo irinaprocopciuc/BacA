@@ -244,16 +244,18 @@ export class TripDetailsComponent implements OnInit {
     let tempShortNameFromProperties = locationName.properties;
     console.log("Prop location name"+JSON.stringify(tempShortNameFromProperties));
     if(tempShortNameFromProperties.short_code !=='undefind')
-      short_name = tempShortNameFromProperties.short_code
-      console.log("Good short code prop : "+short_name);
-    while(short_name == null){
-      destinationCode = locationName.context[i];
-      //TODO REMOVE THE CLOGS
-      console.log("SCTEST: " +JSON.stringify(destinationCode));
-      //console.log("SCTEST: " +JSON.stringify(destinationCode.short_code));
-      if(destinationCode.short_code !== 'undefined')
-        short_name = destinationCode.short_code;
-      i++;
+      short_name = tempShortNameFromProperties.short_code.toUpperCase();
+      //console.log("Good short code prop : "+ short_name);
+      else{
+      while(short_name == null){
+        destinationCode = locationName.context[i];
+        //TODO REMOVE THE CLOGS
+        console.log("SCTEST: " +JSON.stringify(destinationCode));
+        //console.log("SCTEST: " +JSON.stringify(destinationCode.short_code));
+        if(destinationCode.short_code !== 'undefined')
+          short_name = destinationCode.short_code;
+        i++;
+      }
     }
     //TODO REMOVE THE CLOGS
     console.log("Short Country Name :"+short_name);
