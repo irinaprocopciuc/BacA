@@ -110,10 +110,17 @@
                 
             </li>
             <li>
-                <span class="text-secondary"><code>ngx-charts</code></span>
-                <p class="ml-4">This library is used for data visualization and can handle various forms of
-                    customizations while rendering. In ngx-charts their charts rely mostly on using Angular to animate
-                    SVGs, which offers more speed and flexibility as this library was optimized for use in Angular.</p>
+                <span class="text-secondary"><code>ngx-toastr</code></span>
+                <p class="ml-4">This library will be used to inform the user about the results of his actions. It will provide us with a Toast component
+                    which will be used to display the erros and success messages.
+                </p>
+            </li>
+            <li>
+                <span class="text-secondary"><code>mapbox-gl</code></span>
+                <p class="ml-4">
+                    Mapbox GL is a javascript library that uses WEBGL to render interactive maps from vector tiles and Mapbox styles. We will use this library
+                    in provide a map to the user, to add markers for some specific locations he already filled when adding the trip details or to search for a new place.
+                </p>
             </li>
         </ul>
         <hr>
@@ -151,9 +158,10 @@
         <ul>
             <li>
                 <code>
-                    <a href="https://docs.mapbox.com/api/overview/" target="_blank">Mapbox maps service for web API</a>
+                    <a href="https://docs.mapbox.com/api/overview/" target="_blank">Mapbox Maps Service for web API</a>
                 </code>
                 <p>
+                    This service includes several APIs used for creating and creating maps.
                     This API will provide us with a way to customize maps with our own content and imagery, allowing us
                     to display the maps on web pages and mobile devices. 
                 </p>
@@ -164,37 +172,6 @@
                 <p>
                     This API will give us informations about emergency numbers for any country in the world.
                     
-                </p>
-            </li>
-            <li>
-                <code> <a href="https://api.fsapp.io/docs" target="_blank">Fantastic Stay API</a></code>
-                <p>
-                    This API will give us informations about where the user stayed during his trip, if the reservation
-                    was done properly and also
-                    will allow the user to write reviews for a specific accomodation and to see how much he spent there.
-                </p>
-            </li>
-            <li>
-                <code>
-                    <a href="https://developer.trimblemaps.com/" target="_blank">Trimble Trip API</a>
-                </code>
-                <p>
-                    Another API we found useful was the Trimble Trip API which provides us with the tools to build
-                    routing, scheduling and navigation
-                    features in our applications. With its help we will be able to calculate the trip costs, to search
-                    for the user's location and to
-                    update it accuretly on the map. Also, it offers and a trip management solution for the users who
-                    like to travel by car.
-                </p>
-            </li>
-            <li>
-                <code>
-                    <a href="https://allmyles.docs.apiary.io/#reference/dashboard-api" target="_blank">Allmyles API</a>
-                </code>
-                <p>
-                    This API will give us informations about the bookings for a specific user, flights he planed, hotels
-                    where he reserved any rooms and
-                    will also provide us the nearest airport or the location of the hotel.
                 </p>
             </li>
             
@@ -223,31 +200,48 @@
             <section id="Angular">
                 <h5>Angular frontend application</h5>
                 <p>
-                   Through Angular frontend application some of the public API will be accesed: Fantastic stay API, 
-                   Maps Javascript API, Trimble Trip API and Allmyles API. With the help of API we can find details 
+                   Through Angular frontend application some of the public APIs will be accesed. With the help of API we can find details 
                    like where is a person accomodated, located, the shops and hospitals around or a police station 
                    that he or she can go to. 
                    Also, the frontend application will communicate with the backend through some REST APIs made by us.
+                   The Angular frontend application is divided into two modules, the core and the features mdoule. 
+                   In the <strong>core</strong> module we have a folder dor the servicies used by our applications' components, a folder for the models and
+                   an adapter for the dates. The servicies will be used to communicate with the backend by calling the REST APIs or public APIs using HttpClient. 
+                   In the <strong>features</strong> module we can find all the components created for the BacA applicaton, components like login, register, trips-list, trip-details.
+                   <img src="General architecture/Frontend-app-structure.PNG" alt="Frontend structure" class="img-fluid mt-4 mb-4">
                 </p>
             </section>
             <section id="API">
                 <h5>API</h5>
                 <p>
-                   We wil use some public API like Mapbox maps service for web API, Emergency Number API, 
-                   Fantastic stay API,  Trimble Trip API and 
-                   Allmyles API.
+                   We wil use some public API like Mapbox maps service for web API and Emergency Number API.
+                   This APIs are accessed from the frontend servicies by using an API key provided by them. 
+                   The response comes in json format and will be shown to the user by using the created components.
                 </p>
             </section>
             <section id="Java">
                 <h5>Java with Spring Boot </h5>
                 <p>
-                    The backend part it will be made in Java with Spring Boot as a framework.
+                    The backend part will be made in Java with Spring Boot as a framework.
+                    Regarding the backend project structure, we encounter four packages: api, dao, model and service.
+                    The Main is located in the default package and it contains some cors configurations so that the created APIs can be called from the Angular app.
+                    In the <strong>api</strong> package we find the controllers which are used to actually create the APIS accesed by frontend. We have four controllers,
+                    for login, register, trip and errors. 
+                    The controllers will map the request body to the model from <strong>model</strong> package when necessary.
+                    After this it calls the used services from that particular API from <strong>service</strong> package.
+                    The service is responsable with the business logic of the API. In our case, every time it will use a repository from <strong>dao</strong> package 
+                    to accomplish the functionality. Each repository contains the singleton connection to the database and it will execute the necessary queries.
+                    The singleton connection is accomplished by using the Dependency Inversion principle from the SOLID principles implemented by the Dependency Injection design patter.
+                    <img src="General architecture/Backend-packages.PNG" alt="Frontend structure" class="img-fluid mt-4 mb-4">
                 </p>
             </section>
             <section id="MySQL">
                 <h5>MySQL database</h5>
                 <p>
-                In MySQL the database will be created. The backend will communicate with tha database through MySQL.
+                The database will be created in MySQL.
+                In the baca database we created two tables, User and Trip. Each user can have one or more trips related to his account.
+                The backend will communicate with tha database through MySQL.
+                <img src="General architecture/DB_diagram.png" alt="Db Diagram" class="img-fluid mt-4 mb-4">
                 </p>
             </section>
     </section>
@@ -422,12 +416,15 @@
             <li><a href="https://material.angular.io/" target="_blank">Angular Material</a></li>
             <li><a href="https://spring.io/projects/spring-boot" target="_blank">Spring Boot</a></li>
             <li><a href="https://www.tutorialspoint.com/jackson/index.htm" target="_blank">Jackson</a></li>
-            <li><a href="https://api.fsapp.io/docs" target="_blank">Fantastic Stay API</a></li>
-            <li><a href="https://developer.trimblemaps.com/" target="_blank">Trimble Trip API</a></li>
-            <li> <a href="https://allmyles.docs.apiary.io/#reference/dashboard-api" target="_blank">Allmyles API</a>
             </li>
             <li>
                 <a href="https://docs.mapbox.com/api/overview/"> Mapbox Web API</a>
+            </li>
+            <li>
+                <a href="https://docs.mapbox.com/mapbox-gl-js/api/">Mapbox GL</a>
+            </li>
+            <li>
+                <a href="https://www.npmjs.com/package/ngx-toastr">ngx-toastr</a>
             </li>
         </ol>
         <hr>
