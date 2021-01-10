@@ -87,7 +87,7 @@ export class TripDetailsComponent implements OnInit {
     this.currentCountry = "US";
     //this.currentCountry = this.getCurrentLocationCountryCode();
     /*TEST DATA END - TO BE REMOVED */
-    console.log("Destination test: "+this.tripDetails?.startingPoint());
+    console.log("Destination test: "+this.tripDetails?.destination());
     console.log(JSON.stringify(this.tripDetails?.destination))
 
     this.getCurrentLocationEmergencyNumber();
@@ -243,11 +243,11 @@ export class TripDetailsComponent implements OnInit {
     //console.log("Destination Code :"+ JSON.stringify(destinationCode));
     let tempShortNameFromProperties = locationName.properties;
     console.log("Prop location name"+JSON.stringify(tempShortNameFromProperties));
-    if(tempShortNameFromProperties.short_code !=='undefind')
-      short_name = tempShortNameFromProperties.short_code.toUpperCase();
-      //console.log("Good short code prop : "+ short_name);
-      else{
-      while(short_name == null){
+    console.log("destination test : "+tempShortNameFromProperties.short_code);
+    let countryShortCode = tempShortNameFromProperties.short_code;
+    if(countryShortCode !== 'undefined')
+        short_name = tempShortNameFromProperties.short_code;
+    while(short_name == null){
         destinationCode = locationName.context[i];
         //TODO REMOVE THE CLOGS
         console.log("SCTEST: " +JSON.stringify(destinationCode));
@@ -256,7 +256,7 @@ export class TripDetailsComponent implements OnInit {
           short_name = destinationCode.short_code;
         i++;
       }
-    }
+      
     //TODO REMOVE THE CLOGS
     console.log("Short Country Name :"+short_name);
     return short_name.trim().substring(0, 2);
