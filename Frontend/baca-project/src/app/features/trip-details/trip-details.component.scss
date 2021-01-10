@@ -56,3 +56,29 @@
   text-align: center;
   font-family: "Open Sans", sans-serif;
 }
+
+@media screen and (max-width: 800px) {
+  .trip-details-container {
+    width: 70%;
+
+    #map {
+      height: 300px;
+    }
+
+    ::ng-deep {
+      .mapboxgl-ctrl-geocoder {
+        width: 60%;
+        margin: 0;
+        margin-top: 10px;
+
+        svg {
+          top: 6px;
+        }
+
+        input {
+          height: 100%;
+        }
+      }
+    }
+  }
+}

@@ -23,7 +23,7 @@ export class PlaceService {
       'Content-Type': 'text/plain'
     });
     return this.http.post(
-      'https://dev.allmyles.com/v2.0/hotels',
+      '/v2.0/hotels',
       { ...hotelDetails },
       {  headers: headers },
     );

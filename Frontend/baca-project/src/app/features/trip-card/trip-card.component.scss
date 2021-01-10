@@ -16,9 +16,9 @@
     .date-details {
       display: flex;
       flex-direction: column;
-       span {
-         margin-top: 10px;
-       }
+      span {
+        margin-top: 10px;
+      }
     }
   }
 
@@ -30,6 +30,22 @@
     button {
       margin-bottom: 10px;
       cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .card {
+    width: 300px;
+    flex-wrap: wrap;
+
+    .right-container {
+      display: flex;
+      flex-direction: row;
+
+      button {
+        margin-right: 15px;
+      }
     }
   }
 }

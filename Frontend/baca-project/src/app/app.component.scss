@@ -1,4 +1,9 @@
+body {
+  width: 100%;
+}
+
 .app-header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   height: 64px;
@@ -16,9 +21,13 @@
   .login-register-btn {
     display: flex;
     flex-direction: row;
-     span {
-       margin-right: 20px;
-       cursor: pointer;
-     }
+    span {
+      margin-right: 20px;
+      cursor: pointer;
+
+      @media screen and (max-width: 700px) {
+        margin-right: 10px;
+      }
+    }
   }
 }

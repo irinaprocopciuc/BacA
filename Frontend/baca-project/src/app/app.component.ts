@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
 
   logout(): void {
     this.loginService.logout();
-    this.isLoggedIn = false;
   }
 
   login(): void {
