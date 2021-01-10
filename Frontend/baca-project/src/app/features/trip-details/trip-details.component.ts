@@ -241,7 +241,11 @@ export class TripDetailsComponent implements OnInit {
     let i=0;
     //TODO REMOVE THE CLOGS
     //console.log("Destination Code :"+ JSON.stringify(destinationCode));
-    
+    let tempShortNameFromProperties = locationName.properties;
+    console.log("Prop location name"+JSON.stringify(tempShortNameFromProperties));
+    if(tempShortNameFromProperties.short_code !=='undefind')
+      short_name = tempShortNameFromProperties.short_code
+      console.log("Good short code prop : "+short_name);
     while(short_name == null){
       destinationCode = locationName.context[i];
       //TODO REMOVE THE CLOGS
