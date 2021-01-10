@@ -246,7 +246,7 @@ export class TripDetailsComponent implements OnInit {
     console.log("destination test : "+tempShortNameFromProperties.short_code);
     let countryShortCode = tempShortNameFromProperties.short_code;
     if(countryShortCode !== 'undefined')
-        short_name = tempShortNameFromProperties.short_code;
+        short_name = tempShortNameFromProperties.short_code.toUpperCase();
     while(short_name == null){
         destinationCode = locationName.context[i];
         //TODO REMOVE THE CLOGS
