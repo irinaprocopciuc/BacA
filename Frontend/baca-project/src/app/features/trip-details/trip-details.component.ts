@@ -3,10 +3,11 @@ import { MapService } from './../../core/services/map.service';
 import { environment } from './../../../environments/environment';
 import { TripDetails } from 'src/app/core/models/TripDetails';
 import { TripService } from './../../core/services/trip.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import { log } from 'console';
 @Component({
   selector: 'app-trip-details',
   templateUrl: './trip-details.component.html',
@@ -81,10 +82,10 @@ export class TripDetailsComponent implements OnInit {
 
       this.getCityDetails();
     });
-    /*TODO TEST DATA START - TO BE REMOVED*/
+
     this.emergencyNumber = '000';
     this.currentCountry = "US";
-    /*TEST DATA END - TO BE REMOVED */
+
     this.getCurrentLocationEmergencyNumber();
   }
 
@@ -191,50 +192,56 @@ export class TripDetailsComponent implements OnInit {
     }
   }
 
-
-
-
-
   //**EMERGENCY NUMBER EXTRACTION FROM EMERGENCY API BETA - BEGINNING*/
 
-  getCountryCodeFromJSON(locationName): void{
+  getCurrentLocationEmergencyNumber(): void{
+    this.getCurrentLocation();
+    this.tripService.getTripDetails(Number(this.tripId)).subscribe((resp) => {
+      this.tripDetails = resp.response;
+
+      this.mapService
+        .getPlacesForName(this.tripDetails?.destination)
+        .subscribe((placesList) => {
+            let code = this.getCountryCodeFromJSON(placesList['features'][0]);
+            this.currentCountry = code;
+      console.log("This is the corrent contry code :"+ this.currentCountry)
+      this.tripService.getTripLocationEmergencyData(this.currentCountry).subscribe((resp)=>{
+      this.emergencyNumber = this.getEmergencyNumberFromData(resp);
+          });
+        });
+    });   
+  }
+
+  getCountryCodeFromJSON(locationName): string{
     let destinationCode;
     let short_name = null;
     let i=0;
-    //TODO REMOVE THE CLOGS
-    //console.log("Destination Code :"+ JSON.stringify(destinationCode));
+    let tempShortNameFromProperties = locationName.properties;
+    console.log("Prop location name"+JSON.stringify(tempShortNameFromProperties));
+    console.log("destination test : "+tempShortNameFromProperties.short_code);
+    let countryShortCode = tempShortNameFromProperties.short_code;
+    if(countryShortCode !== 'undefined')
+        short_name = tempShortNameFromProperties.short_code;
     while(short_name == null){
-      destinationCode = locationName.context[i];
-      //TODO REMOVE THE CLOGS
-      //console.log("SCTEST: " +JSON.stringify(destinationCode));
-      //console.log("SCTEST: " +JSON.stringify(destinationCode.short_code));
-      if(destinationCode.short_code !== 'undefined')
-        short_name = destinationCode.short_code;
-      i++;
-    }
-    //TODO REMOVE THE CLOGS
-    //console.log("Short Country Name :"+short_name.trim().substring(0, 2));
+        destinationCode = locationName.context[i];
+        if(destinationCode.short_code !== 'undefined')
+          short_name = destinationCode.short_code;
+        i++;
+      }
     return short_name.trim().substring(0, 2);
-
-
   }
-  getCurrentLocationCountryCode(): void{
-    //console.log("Trip destination:"+ this.tripDetails?.destination.toString());
+  getCurrentLocationCountryCode() : void{
     this.mapService
         .getPlacesForName(this.tripDetails?.destination.toString())
         .subscribe((placesList) => {
-           //TODO REMOVE THE CLOGS
-            //console.log(placesList['features'][0]);
-            //console.log("Current country code after edit: "+ this.currentCountry);
-          //TODO return this.getCountryCodeFromJSON(placesList['features'][0].toString());
+            console.log(placesList['features'][0]);
+            var code = this.getCountryCodeFromJSON(placesList['features'][0]);
+            console.log("Code :" + code);
+            this.currentCountry = code;
         });
   }
   getEmergencyNumberFromData(emergencyData): string{
-    //TODO REMOVE THE CLOGS
-    //console.log(JSON.stringify(emergencyData));
     let datanumber = emergencyData['data'];
-    //TODO REMOVE THE CLOGS
-    //console.log(JSON.stringify(datanumber));
     let isMember112 = datanumber['member_112'];
     if(isMember112 == true)
       return '112';
@@ -244,16 +251,5 @@ export class TripDetailsComponent implements OnInit {
     }
     return '000';
   }
-
-  getCurrentLocationEmergencyNumber(): void{
-    this.getCurrentLocationCountryCode();
-    this.tripService.getTripLocationEmergencyData(this.currentCountry).subscribe((resp)=>{
-      this.emergencyNumber = this.getEmergencyNumberFromData(resp);
-      //TODO REMOVE THE CLOGS
-      //console.log(JSON.stringify(resp));
-      //console.log("Emergency Number: "+this.emergencyNumber);
-    });
-  }
-
   //**EMERGENCY NUMBER EXTRACTION FROM EMERGENCY API BETA - END*/
 }
